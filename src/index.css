@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   Design tokens — palette "data / tech" sombre
+   Tailwind v4 : ces variables génèrent les utilitaires (bg-*, text-*, border-*)
+---------------------------------------------------------------------------- */
+@theme {
+  /* Surfaces & texte */
+  --color-bg: #070b14;
+  --color-surface: #0b1320;
+  --color-surface-2: #0f1a2b;
+  --color-line: rgba(148, 163, 184, 0.14);
+  --color-ink: #e7eef8;
+  --color-muted: #93a4bd;
+
+  /* Marque */
+  --color-brand: #38bdf8;
+  --color-brand-2: #818cf8;
+
+  /* Couleurs des 3 compétences */
+  --color-c4: #38bdf8; /* Gérer les données    — cyan  */
+  --color-c5: #a78bfa; /* Conduire un projet SI — violet */
+  --color-c6: #34d399; /* Collaborer / Manager  — émeraude */
+
+  /* Typographies */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Rayons */
+  --radius-xl2: 1.25rem;
+}
+
+/* ----------------------------------------------------------------------------
+   Base
+---------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-brand) 35%, transparent);
+    color: #fff;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: var(--color-bg); }
+  ::-webkit-scrollbar-thumb {
+    background: #1e2c44;
+    border-radius: 999px;
+    border: 3px solid var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #2a3c5c; }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Composants utilitaires réutilisables
+---------------------------------------------------------------------------- */
+@layer components {
+  .container-px {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  .card {
+    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface-2) 100%);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-xl2);
+  }
+
+  .glass {
+    background: color-mix(in oklab, var(--color-surface) 75%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--color-line);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    border: 1px solid var(--color-line);
+    background: color-mix(in oklab, var(--color-surface-2) 70%, transparent);
+    color: var(--color-muted);
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1.5px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.3s ease;
+  }
+  .link-underline:hover { background-size: 100% 1.5px; }
+}
+
+/* ----------------------------------------------------------------------------
+   Effets
+---------------------------------------------------------------------------- */
+.text-gradient {
+  background: linear-gradient(100deg, var(--color-brand), var(--color-brand-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 50%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 50%, transparent 100%);
+}
+
+.glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

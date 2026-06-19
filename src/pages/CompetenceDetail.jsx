@@ -32,10 +32,11 @@ export default function CompetenceDetail() {
 
   return (
     <div className="container-px pt-28 pb-10">
-      {/* fond coloré */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="glow left-1/2 top-0 h-[28rem] w-[28rem] -translate-x-1/2" style={{ background: c.color, opacity: 0.18 }} />
-      </div>
+      {/* bandeau de teinte douce en haut de page */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-80"
+        style={{ background: `linear-gradient(180deg, ${c.color}14 0%, transparent 100%)` }}
+      />
 
       <Link to="/competences" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink">
         <ArrowLeft size={16} /> Toutes les compétences

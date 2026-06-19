@@ -1,8 +1,8 @@
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { ArrowRight, Compass, Sparkles, Database } from 'lucide-react'
-import { Github, Linkedin } from '../components/BrandIcons'
-import { profil, contact, chiffresCles } from '../data/site'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { ChevronRight, ChevronDown, ArrowRight } from 'lucide-react'
+import { profil, chiffresCles } from '../data/site'
 import { competences } from '../data/competences'
 import { projets } from '../data/projets'
 import CompetenceCard from '../components/CompetenceCard'
@@ -12,159 +12,214 @@ import Reveal from '../components/Reveal'
 
 export default function Home() {
   const vedettes = projets.filter((p) => p.vedette)
+  const heroRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  })
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 140])
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0])
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.95])
 
   return (
     <>
-      {/* ===================== HERO ===================== */}
-      <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40">
-        <div className="absolute inset-0 -z-10 grid-bg" />
-        <div className="container-px">
+      {/* ===================== HERO plein écran ===================== */}
+      <section ref={heroRef} className="relative flex min-h-screen items-center justify-center overflow-hidden">
+        {/* fond clair très subtil */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-white to-surface-2" />
+        <div
+          className="absolute left-1/2 top-1/3 -z-10 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full opacity-[0.07]"
+          style={{ background: 'radial-gradient(circle, #0071e3 0%, transparent 60%)' }}
+        />
+
+        <motion.div
+          style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
+          className="container-px py-28 text-center"
+        >
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="eyebrow"
+          >
+            Portfolio de fin de parcours · BUT3 Informatique
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto mt-4 max-w-4xl text-[44px] font-semibold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[72px] lg:text-[88px]"
+          >
+            {profil.prenom} {profil.nom}
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto mt-5 max-w-2xl text-xl text-ink-soft sm:text-2xl"
+          >
+            {profil.titre}. <span className="text-muted">{profil.sousTitre}.</span>
+          </motion.p>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-3xl"
+            transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-9 flex flex-wrap items-center justify-center gap-4"
           >
-            <span className="chip">
-              <Sparkles size={14} className="text-brand" />
-              Portfolio de fin de parcours · BUT3 Informatique
-            </span>
-
-            <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] text-ink sm:text-6xl">
-              {profil.prenom} <span className="text-gradient">{profil.nom}</span>
-            </h1>
-            <p className="mt-4 text-xl font-medium text-ink/90">{profil.titre}</p>
-            <p className="text-lg text-brand">{profil.sousTitre}</p>
-
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-              {profil.accroche}
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link
-                to="/competences"
-                className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-[#04121f] transition-transform hover:scale-[1.03]"
-              >
-                Découvrir mes compétences
-                <ArrowRight size={18} />
-              </Link>
-              <Link
-                to="/demarche"
-                className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface-2"
-              >
-                <Compass size={18} /> La démarche
-              </Link>
-              <div className="ml-1 flex items-center gap-2">
-                <a href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub" className="grid h-11 w-11 place-items-center rounded-full border border-line text-muted transition-colors hover:text-ink">
-                  <Github size={18} />
-                </a>
-                <a href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="grid h-11 w-11 place-items-center rounded-full border border-line text-muted transition-colors hover:text-ink">
-                  <Linkedin size={18} />
-                </a>
-              </div>
-            </div>
+            <Link to="/competences" className="btn btn-primary">
+              Découvrir mes compétences <ChevronRight size={17} />
+            </Link>
+            <Link to="/demarche" className="link-arrow text-[17px]">
+              La démarche portfolio <ChevronRight size={16} />
+            </Link>
           </motion.div>
+        </motion.div>
 
-          {/* Chiffres clés */}
-          <motion.dl
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4"
-          >
-            {chiffresCles.map((c) => (
-              <div key={c.label} className="card p-5">
-                <dt className="font-display text-2xl font-bold text-gradient sm:text-3xl">{c.valeur}</dt>
-                <dd className="mt-1 text-sm text-muted">{c.label}</dd>
-              </div>
+        {/* indicateur de défilement */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.1, duration: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted"
+        >
+          <motion.div animate={{ y: [0, 7, 0] }} transition={{ repeat: Infinity, duration: 1.8 }}>
+            <ChevronDown size={22} />
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ===================== STATEMENT ===================== */}
+      <section className="bg-white py-28 sm:py-36">
+        <div className="container-px">
+          <Reveal>
+            <p className="mx-auto max-w-4xl text-center text-[30px] font-semibold leading-[1.18] tracking-tight text-ink sm:text-[46px]">
+              La donnée, <span className="text-muted">du modèle à la décision.</span> Un portfolio qui
+              ne se contente pas de montrer&nbsp;— il <span className="text-brand">démontre</span>.
+            </p>
+          </Reveal>
+
+          {/* chiffres clés */}
+          <Reveal delay={0.1}>
+            <dl className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-[18px] border border-line bg-line sm:grid-cols-4">
+              {chiffresCles.map((c) => (
+                <div key={c.label} className="bg-white p-6 text-center">
+                  <dt className="text-[32px] font-semibold tracking-tight text-ink">{c.valeur}</dt>
+                  <dd className="mt-1 text-[13px] text-muted">{c.label}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ===================== COMPÉTENCES (tuiles) ===================== */}
+      <section className="bg-surface-2 py-24 sm:py-32">
+        <div className="container-wide">
+          <SectionHeading
+            center
+            eyebrow="Les 3 compétences · Niveau Confirmé"
+            title="Une expertise centrée sur la donnée"
+            description="Le parcours AGED développe trois compétences au plus haut niveau du BUT. Chaque page démontre, traces à l'appui, l'acquisition du niveau Confirmé."
+          />
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {competences.map((c, i) => (
+              <Reveal key={c.id} delay={i * 0.1}>
+                <CompetenceCard competence={c} />
+              </Reveal>
             ))}
-          </motion.dl>
+          </div>
         </div>
       </section>
 
-      {/* ===================== COMPÉTENCES ===================== */}
-      <section className="container-px py-20">
-        <SectionHeading
-          eyebrow="Les 3 compétences · Niveau Confirmé"
-          title="Une expertise centrée sur la donnée"
-          description="Le parcours AGED développe trois compétences au plus haut niveau du BUT. Chaque page démontre, traces à l'appui, l'acquisition du niveau Confirmé."
+      {/* ===================== FIL ROUGE (section sombre cinématique) ===================== */}
+      <section className="relative overflow-hidden bg-black py-32 text-white sm:py-44">
+        <div
+          className="absolute inset-0 -z-0 opacity-60"
+          style={{ background: 'radial-gradient(120% 80% at 50% 0%, #0a2540 0%, #000 60%)' }}
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {competences.map((c, i) => (
-            <Reveal key={c.id} delay={i * 0.08}>
-              <CompetenceCard competence={c} index={i} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ===================== DÉMARCHE (teaser) ===================== */}
-      <section className="container-px py-10">
-        <Reveal>
-          <div className="card relative overflow-hidden p-8 sm:p-12">
-            <div className="glow right-0 top-0 h-64 w-64" style={{ background: '#38bdf8' }} />
-            <div className="relative max-w-2xl">
-              <span className="chip"><Database size={14} className="text-brand" /> Démarche portfolio</span>
-              <h2 className="mt-5 text-2xl font-bold text-ink sm:text-3xl">
-                Un portfolio, ce n'est pas une vitrine : c'est une preuve.
-              </h2>
-              <p className="mt-4 text-muted">
-                Conformément à l'Approche Par Compétences, ce site adopte une posture réflexive et critique :
-                il collectionne des traces issues de mes mises en situation, puis les analyse au regard des
-                composantes essentielles et des apprentissages critiques du référentiel.
-              </p>
-              <Link
-                to="/demarche"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand link-underline"
-              >
-                Comprendre la démarche et l'évaluation <ArrowRight size={16} />
+        <div className="container-px relative text-center">
+          <Reveal>
+            <p className="eyebrow text-white/60">Le fil rouge</p>
+            <h2 className="mx-auto mt-4 max-w-4xl text-[34px] font-semibold leading-[1.08] tracking-tight sm:text-[60px]">
+              Deux ans chez <span className="text-white">RATP Infrastructure</span>.
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-white/70 sm:text-xl">
+              De l'analyse de bases de données en production à la modernisation d'un système
+              d'archivage critique : un cas réel qui relie mes trois compétences.
+            </p>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+              <Link to="/realisations" className="btn btn-tesla bg-white text-black hover:bg-white/90">
+                Voir les réalisations
+              </Link>
+              <Link to="/parcours" className="btn btn-tesla border border-white/40 text-white hover:bg-white/10">
+                Mon parcours
               </Link>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ===================== DÉMARCHE (feature claire) ===================== */}
+      <section className="bg-white py-24 sm:py-32">
+        <div className="container-px text-center">
+          <Reveal>
+            <p className="eyebrow">Démarche portfolio</p>
+            <h2 className="mx-auto mt-4 max-w-3xl text-[30px] font-semibold leading-[1.12] tracking-tight text-ink sm:text-[44px]">
+              Un portfolio, ce n'est pas une vitrine. C'est une preuve.
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-lg text-muted">
+              Conformément à l'Approche Par Compétences, ce site adopte une posture réflexive :
+              collectionner des traces, puis les analyser au regard des composantes essentielles et
+              des apprentissages critiques du référentiel.
+            </p>
+            <Link to="/demarche" className="link-arrow mt-7 inline-flex text-[17px]">
+              Comprendre la démarche et l'évaluation <ChevronRight size={16} />
+            </Link>
+          </Reveal>
+        </div>
       </section>
 
       {/* ===================== RÉALISATIONS ===================== */}
-      <section className="container-px py-20">
-        <div className="flex items-end justify-between gap-4">
-          <SectionHeading
-            eyebrow="Réalisations"
-            title="Des projets qui font preuve"
-            description="Les traces concrètes mobilisées dans mon analyse réflexive."
-          />
-          <Link to="/realisations" className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-brand link-underline sm:inline-flex">
-            Tout voir <ArrowRight size={16} />
-          </Link>
-        </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {vedettes.map((p, i) => (
-            <Reveal key={p.id} delay={i * 0.08}>
-              <ProjectCard projet={p} />
-            </Reveal>
-          ))}
-        </div>
-        <div className="mt-8 sm:hidden">
-          <Link to="/realisations" className="inline-flex items-center gap-1 text-sm font-semibold text-brand">
-            Toutes les réalisations <ArrowRight size={16} />
-          </Link>
+      <section className="bg-surface-2 py-24 sm:py-32">
+        <div className="container-wide">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <SectionHeading
+              eyebrow="Réalisations"
+              title="Des projets qui font preuve"
+              description="Les traces concrètes mobilisées dans mon analyse réflexive."
+            />
+            <Link to="/realisations" className="link-arrow hidden text-[15px] sm:inline-flex">
+              Tout voir <ChevronRight size={16} />
+            </Link>
+          </div>
+          <div className="mt-14 grid gap-6 md:grid-cols-2">
+            {vedettes.map((p, i) => (
+              <Reveal key={p.id} delay={i * 0.1}>
+                <ProjectCard projet={p} />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ===================== CTA ===================== */}
-      <section className="container-px pb-10">
-        <Reveal>
-          <div className="card flex flex-col items-center gap-5 p-10 text-center sm:p-14">
-            <h2 className="max-w-2xl text-2xl font-bold text-ink sm:text-3xl">
-              Envie d'échanger sur la donnée, l'alternance ou mon parcours ?
+      <section className="bg-white py-28 sm:py-36">
+        <div className="container-px text-center">
+          <Reveal>
+            <h2 className="mx-auto max-w-3xl text-[34px] font-semibold tracking-tight text-ink sm:text-[52px]">
+              Échangeons.
             </h2>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-[#04121f] transition-transform hover:scale-[1.03]"
-            >
-              Me contacter <ArrowRight size={18} />
+            <p className="mx-auto mt-4 max-w-xl text-lg text-muted">
+              Une question sur mon parcours, mon alternance ou une opportunité ?
+            </p>
+            <Link to="/contact" className="btn btn-primary mt-8">
+              Me contacter <ArrowRight size={17} />
             </Link>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </section>
     </>
   )

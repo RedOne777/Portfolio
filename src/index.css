@@ -1,33 +1,36 @@
 @import "tailwindcss";
 
 /* ----------------------------------------------------------------------------
-   Design tokens — palette "data / tech" sombre
-   Tailwind v4 : ces variables génèrent les utilitaires (bg-*, text-*, border-*)
+   Design tokens — langage visuel inspiré d'Apple / Tesla
+   Clair, typographie système (SF Pro / Segoe), hairlines, beaucoup d'espace.
+   Les noms de tokens sont conservés (compat utilitaires) avec de nouvelles valeurs.
 ---------------------------------------------------------------------------- */
 @theme {
   /* Surfaces & texte */
-  --color-bg: #070b14;
-  --color-surface: #0b1320;
-  --color-surface-2: #0f1a2b;
-  --color-line: rgba(148, 163, 184, 0.14);
-  --color-ink: #e7eef8;
-  --color-muted: #93a4bd;
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-2: #f5f5f7;   /* gris clair signature Apple */
+  --color-bg-dark: #000000;      /* sections "cinématiques" Tesla */
+  --color-line: #d2d2d7;         /* hairline Apple */
+  --color-ink: #1d1d1f;          /* quasi-noir Apple */
+  --color-ink-soft: #424245;
+  --color-muted: #6e6e73;        /* gris secondaire Apple */
 
-  /* Marque */
-  --color-brand: #38bdf8;
-  --color-brand-2: #818cf8;
+  /* Accents */
+  --color-brand: #0071e3;        /* bleu Apple */
+  --color-brand-2: #5e5ce6;      /* indigo système */
 
-  /* Couleurs des 3 compétences */
-  --color-c4: #38bdf8; /* Gérer les données    — cyan  */
-  --color-c5: #a78bfa; /* Conduire un projet SI — violet */
-  --color-c6: #34d399; /* Collaborer / Manager  — émeraude */
+  /* Couleurs des 3 compétences (palette système, sobre) */
+  --color-c4: #0071e3;  /* Gérer les données     — bleu   */
+  --color-c5: #5e5ce6;  /* Conduire un projet SI  — indigo */
+  --color-c6: #1d9d74;  /* Collaborer / Manager   — vert   */
 
-  /* Typographies */
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Typographies — pile système (rend SF Pro sur Apple, Segoe sur Windows) */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-sans);
 
-  /* Rayons */
-  --radius-xl2: 1.25rem;
+  --radius-card: 18px;
 }
 
 /* ----------------------------------------------------------------------------
@@ -43,115 +46,188 @@
     background-color: var(--color-bg);
     color: var(--color-ink);
     font-family: var(--font-sans);
+    letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4 {
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.06;
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--color-brand) 35%, transparent);
-    color: #fff;
+    background: #b3d7ff;
+    color: #000;
   }
 
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 11px; height: 11px; }
-  ::-webkit-scrollbar-track { background: var(--color-bg); }
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
-    background: #1e2c44;
+    background: #c7c7cc;
     border-radius: 999px;
     border: 3px solid var(--color-bg);
   }
-  ::-webkit-scrollbar-thumb:hover { background: #2a3c5c; }
+  ::-webkit-scrollbar-thumb:hover { background: #aeaeb2; }
 
   :focus-visible {
     outline: 2px solid var(--color-brand);
-    outline-offset: 2px;
-    border-radius: 4px;
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 }
 
 /* ----------------------------------------------------------------------------
-   Composants utilitaires réutilisables
+   Composants
 ---------------------------------------------------------------------------- */
 @layer components {
   .container-px {
     width: 100%;
-    max-width: 76rem;
+    max-width: 1024px;
     margin-inline: auto;
-    padding-inline: 1.25rem;
+    padding-inline: 22px;
+  }
+  .container-wide {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 22px;
   }
 
+  /* Cartes Apple : blanc, hairline, grand rayon */
   .card {
-    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface-2) 100%);
+    background: var(--color-surface);
     border: 1px solid var(--color-line);
-    border-radius: var(--radius-xl2);
+    border-radius: var(--radius-card);
+  }
+  /* Variante sur fond gris : carte gris clair sans bordure */
+  .card-soft {
+    background: var(--color-surface-2);
+    border-radius: var(--radius-card);
   }
 
+  /* Barre de navigation translucide façon Apple */
   .glass {
-    background: color-mix(in oklab, var(--color-surface) 75%, transparent);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid var(--color-line);
+    background: color-mix(in srgb, #ffffff 72%, transparent);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--color-line);
   }
 
   .chip {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.28rem 0.7rem;
+    padding: 0.3rem 0.75rem;
     border-radius: 999px;
     font-size: 0.78rem;
     font-weight: 500;
-    border: 1px solid var(--color-line);
-    background: color-mix(in oklab, var(--color-surface-2) 70%, transparent);
-    color: var(--color-muted);
+    background: var(--color-surface-2);
+    color: var(--color-ink-soft);
   }
 
-  .link-underline {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-size: 0% 1.5px;
-    background-repeat: no-repeat;
-    background-position: 0 100%;
-    transition: background-size 0.3s ease;
+  /* Boutons pilule */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 980px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.3rem;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    white-space: nowrap;
   }
-  .link-underline:hover { background-size: 100% 1.5px; }
+  .btn-primary {
+    background: var(--color-brand);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #0077ed; transform: translateY(-1px); }
+
+  .btn-ghost {
+    background: var(--color-surface-2);
+    color: var(--color-ink);
+  }
+  .btn-ghost:hover { background: #e8e8ed; }
+
+  .btn-dark {
+    background: var(--color-ink);
+    color: #fff;
+  }
+  .btn-dark:hover { background: #000; transform: translateY(-1px); }
+
+  /* CTA façon Tesla (large, capitales, sur sections plein écran) */
+  .btn-tesla {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 260px;
+    padding: 0.85rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+  }
+
+  /* Lien Apple "En savoir plus ›" */
+  .link-arrow {
+    color: var(--color-brand);
+    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+  }
+  .link-arrow:hover { text-decoration: underline; }
+
+  .eyebrow {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
 }
 
 /* ----------------------------------------------------------------------------
    Effets
 ---------------------------------------------------------------------------- */
+
+/* Texte qui s'affichait en dégradé : désormais encre pleine, sobre */
 .text-gradient {
-  background: linear-gradient(100deg, var(--color-brand), var(--color-brand-2));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-ink);
 }
 
-.grid-bg {
-  background-image:
-    linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
-  background-size: 44px 44px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 50%, transparent 100%);
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 50%, transparent 100%);
+/* Sections cinématiques plein écran (scroll snap façon Tesla) */
+.snap-container {
+  scroll-snap-type: y proximity;
+}
+.snap-section {
+  scroll-snap-align: start;
 }
 
-.glow {
+/* Léger voile pour lisibilité du texte sur fond sombre */
+.scrim-bottom::after {
+  content: "";
   position: absolute;
-  border-radius: 999px;
-  filter: blur(90px);
-  opacity: 0.45;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 100%);
   pointer-events: none;
-  z-index: 0;
+}
+.scrim-top::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 45%);
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .snap-container { scroll-snap-type: none; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;

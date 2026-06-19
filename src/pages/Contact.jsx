@@ -60,7 +60,7 @@ export default function Contact() {
             </button>
             <a
               href={`mailto:${contact.email}`}
-              className="inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2.5 text-sm font-semibold text-[#04121f]"
+              className="inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2.5 text-sm font-semibold text-white"
             >
               <Mail size={16} /> Écrire
             </a>

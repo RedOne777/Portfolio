@@ -99,7 +99,7 @@ export default function Demarche() {
                 }`}
               >
                 {n.actuel && (
-                  <span className="absolute right-4 top-4 rounded-full bg-brand px-2.5 py-0.5 text-xs font-bold text-[#04121f]">
+                  <span className="absolute right-4 top-4 rounded-full bg-brand px-2.5 py-0.5 text-xs font-bold text-white">
                     Mon niveau
                   </span>
                 )}
@@ -164,8 +164,7 @@ export default function Demarche() {
 
       {/* Comment lire */}
       <Reveal className="mt-20">
-        <div className="card relative overflow-hidden p-8 sm:p-10">
-          <div className="glow right-0 bottom-0 h-64 w-64" style={{ background: '#a78bfa' }} />
+        <div className="card-soft relative overflow-hidden p-8 sm:p-10">
           <div className="relative max-w-2xl">
             <span className="chip"><HelpCircle size={14} className="text-brand" /> Mode d'emploi</span>
             <h2 className="mt-4 text-2xl font-bold text-ink">Comment lire ce portfolio</h2>
@@ -176,7 +175,7 @@ export default function Demarche() {
               j'améliorerais).
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link to="/competences" className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-[#04121f]">
+              <Link to="/competences" className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white">
                 Explorer les compétences <ArrowRight size={16} />
               </Link>
             </div>

@@ -201,9 +201,11 @@
   color: var(--color-ink);
 }
 
-/* Sections cinématiques plein écran (scroll snap façon Tesla) */
-.snap-container {
+/* Sections cinématiques plein écran (scroll snap façon Tesla).
+   Activé uniquement sur l'accueil via la classe .snap sur <html>. */
+html.snap {
   scroll-snap-type: y proximity;
+  scroll-padding-top: 3rem; /* compense la navbar fixe */
 }
 .snap-section {
   scroll-snap-align: start;

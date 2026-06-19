@@ -1,17 +1,20 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ChevronRight, ChevronDown, ArrowRight } from 'lucide-react'
-import { profil, chiffresCles } from '../data/site'
+import { ChevronRight, ChevronDown, ArrowRight, Database, Workflow, Users } from 'lucide-react'
+import { profil } from '../data/site'
 import { competences } from '../data/competences'
-import { projets } from '../data/projets'
-import CompetenceCard from '../components/CompetenceCard'
-import ProjectCard from '../components/ProjectCard'
-import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 
+const ICONS = { c4: Database, c5: Workflow, c6: Users }
+
 export default function Home() {
-  const vedettes = projets.filter((p) => p.vedette)
+  // Active le scroll-snap uniquement sur l'accueil
+  useEffect(() => {
+    document.documentElement.classList.add('snap')
+    return () => document.documentElement.classList.remove('snap')
+  }, [])
+
   const heroRef = useRef(null)
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -23,9 +26,11 @@ export default function Home() {
 
   return (
     <>
-      {/* ===================== HERO plein écran ===================== */}
-      <section ref={heroRef} className="relative flex min-h-screen items-center justify-center overflow-hidden">
-        {/* fond clair très subtil */}
+      {/* ===================== ÉCRAN 1 — HERO ===================== */}
+      <section
+        ref={heroRef}
+        className="snap-section relative flex min-h-screen items-center justify-center overflow-hidden"
+      >
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-white to-surface-2" />
         <div
           className="absolute left-1/2 top-1/3 -z-10 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full opacity-[0.07]"
@@ -44,7 +49,6 @@ export default function Home() {
           >
             Portfolio de fin de parcours · BUT3 Informatique
           </motion.p>
-
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -53,7 +57,6 @@ export default function Home() {
           >
             {profil.prenom} {profil.nom}
           </motion.h1>
-
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -62,7 +65,6 @@ export default function Home() {
           >
             {profil.titre}. <span className="text-muted">{profil.sousTitre}.</span>
           </motion.p>
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -78,7 +80,6 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {/* indicateur de défilement */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -91,59 +92,71 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ===================== STATEMENT ===================== */}
-      <section className="bg-white py-28 sm:py-36">
-        <div className="container-px">
-          <Reveal>
-            <p className="mx-auto max-w-4xl text-center text-[30px] font-semibold leading-[1.18] tracking-tight text-ink sm:text-[46px]">
-              La donnée, <span className="text-muted">du modèle à la décision.</span> Un portfolio qui
-              ne se contente pas de montrer&nbsp;— il <span className="text-brand">démontre</span>.
-            </p>
-          </Reveal>
+      {/* ===================== ÉCRANS 2-4 — COMPÉTENCES ===================== */}
+      {competences.map((c, i) => {
+        const Icon = ICONS[c.id] || Database
+        return (
+          <section
+            key={c.id}
+            className="snap-section relative flex min-h-screen items-center justify-center overflow-hidden"
+            style={{ background: i % 2 === 0 ? '#ffffff' : 'var(--color-surface-2)' }}
+          >
+            {/* filigrane code */}
+            <span
+              className="pointer-events-none absolute select-none text-[34vw] font-bold leading-none tracking-tighter sm:text-[24vw]"
+              style={{ color: c.color, opacity: 0.05 }}
+              aria-hidden="true"
+            >
+              {c.code}
+            </span>
+            {/* teinte radiale */}
+            <div
+              className="pointer-events-none absolute left-1/2 top-1/2 h-[36rem] w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full"
+              style={{ background: `radial-gradient(circle, ${c.color}14 0%, transparent 60%)` }}
+            />
 
-          {/* chiffres clés */}
-          <Reveal delay={0.1}>
-            <dl className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-[18px] border border-line bg-line sm:grid-cols-4">
-              {chiffresCles.map((c) => (
-                <div key={c.label} className="bg-white p-6 text-center">
-                  <dt className="text-[32px] font-semibold tracking-tight text-ink">{c.valeur}</dt>
-                  <dd className="mt-1 text-[13px] text-muted">{c.label}</dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ===================== COMPÉTENCES (tuiles) ===================== */}
-      <section className="bg-surface-2 py-24 sm:py-32">
-        <div className="container-wide">
-          <SectionHeading
-            center
-            eyebrow="Les 3 compétences · Niveau Confirmé"
-            title="Une expertise centrée sur la donnée"
-            description="Le parcours AGED développe trois compétences au plus haut niveau du BUT. Chaque page démontre, traces à l'appui, l'acquisition du niveau Confirmé."
-          />
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {competences.map((c, i) => (
-              <Reveal key={c.id} delay={i * 0.1}>
-                <CompetenceCard competence={c} />
+            <div className="container-px relative z-10 text-center">
+              <Reveal>
+                <span
+                  className="mx-auto grid h-16 w-16 place-items-center rounded-2xl"
+                  style={{ background: `${c.color}1a`, color: c.color }}
+                >
+                  <Icon size={30} />
+                </span>
+                <p className="mt-6 text-sm font-semibold tracking-wide" style={{ color: c.color }}>
+                  Compétence {c.code.replace('C', '')} · Niveau Confirmé
+                </p>
+                <h2 className="mx-auto mt-3 max-w-4xl text-[40px] font-semibold leading-[1.06] tracking-tight text-ink sm:text-[64px] lg:text-[76px]">
+                  {c.titre}
+                </h2>
+                <p className="mx-auto mt-6 max-w-2xl text-lg text-muted sm:text-xl">{c.tagline}</p>
+                <p className="mt-5 text-sm text-muted">
+                  {c.apprentissagesCritiques.length} apprentissages critiques ·{' '}
+                  {c.composantesEssentielles.length} composantes essentielles
+                </p>
+                <Link
+                  to={`/competences/${c.slug}`}
+                  className="btn mt-9 text-white"
+                  style={{ background: c.color }}
+                >
+                  Explorer la compétence <ChevronRight size={17} />
+                </Link>
               </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
+          </section>
+        )
+      })}
 
-      {/* ===================== FIL ROUGE (section sombre cinématique) ===================== */}
-      <section className="relative overflow-hidden bg-black py-32 text-white sm:py-44">
+      {/* ===================== ÉCRAN 5 — FIL ROUGE RATP (sombre) ===================== */}
+      <section className="snap-section relative flex min-h-screen items-center justify-center overflow-hidden bg-black text-white">
         <div
-          className="absolute inset-0 -z-0 opacity-60"
+          className="absolute inset-0 opacity-70"
           style={{ background: 'radial-gradient(120% 80% at 50% 0%, #0a2540 0%, #000 60%)' }}
         />
-        <div className="container-px relative text-center">
+        <div className="container-px relative z-10 text-center">
           <Reveal>
             <p className="eyebrow text-white/60">Le fil rouge</p>
-            <h2 className="mx-auto mt-4 max-w-4xl text-[34px] font-semibold leading-[1.08] tracking-tight sm:text-[60px]">
+            <h2 className="mx-auto mt-4 max-w-4xl text-[36px] font-semibold leading-[1.08] tracking-tight sm:text-[64px]">
               Deux ans chez <span className="text-white">RATP Infrastructure</span>.
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-white/70 sm:text-xl">
@@ -162,62 +175,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===================== DÉMARCHE (feature claire) ===================== */}
-      <section className="bg-white py-24 sm:py-32">
+      {/* ===================== ÉCRAN 6 — CTA ===================== */}
+      <section className="snap-section relative flex min-h-screen items-center justify-center bg-white">
         <div className="container-px text-center">
           <Reveal>
-            <p className="eyebrow">Démarche portfolio</p>
-            <h2 className="mx-auto mt-4 max-w-3xl text-[30px] font-semibold leading-[1.12] tracking-tight text-ink sm:text-[44px]">
-              Un portfolio, ce n'est pas une vitrine. C'est une preuve.
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-lg text-muted">
-              Conformément à l'Approche Par Compétences, ce site adopte une posture réflexive :
-              collectionner des traces, puis les analyser au regard des composantes essentielles et
-              des apprentissages critiques du référentiel.
-            </p>
-            <Link to="/demarche" className="link-arrow mt-7 inline-flex text-[17px]">
-              Comprendre la démarche et l'évaluation <ChevronRight size={16} />
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ===================== RÉALISATIONS ===================== */}
-      <section className="bg-surface-2 py-24 sm:py-32">
-        <div className="container-wide">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading
-              eyebrow="Réalisations"
-              title="Des projets qui font preuve"
-              description="Les traces concrètes mobilisées dans mon analyse réflexive."
-            />
-            <Link to="/realisations" className="link-arrow hidden text-[15px] sm:inline-flex">
-              Tout voir <ChevronRight size={16} />
-            </Link>
-          </div>
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
-            {vedettes.map((p, i) => (
-              <Reveal key={p.id} delay={i * 0.1}>
-                <ProjectCard projet={p} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===================== CTA ===================== */}
-      <section className="bg-white py-28 sm:py-36">
-        <div className="container-px text-center">
-          <Reveal>
-            <h2 className="mx-auto max-w-3xl text-[34px] font-semibold tracking-tight text-ink sm:text-[52px]">
+            <p className="eyebrow">Démarche réflexive · niveau Confirmé</p>
+            <h2 className="mx-auto mt-4 max-w-3xl text-[40px] font-semibold tracking-tight text-ink sm:text-[64px]">
               Échangeons.
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-lg text-muted">
+            <p className="mx-auto mt-5 max-w-xl text-lg text-muted">
               Une question sur mon parcours, mon alternance ou une opportunité ?
             </p>
-            <Link to="/contact" className="btn btn-primary mt-8">
-              Me contacter <ArrowRight size={17} />
-            </Link>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+              <Link to="/contact" className="btn btn-primary">
+                Me contacter <ArrowRight size={17} />
+              </Link>
+              <Link to="/profil" className="link-arrow text-[17px]">
+                En savoir plus sur moi <ChevronRight size={16} />
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>

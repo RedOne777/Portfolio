@@ -9,7 +9,7 @@ export default function Realisations() {
 
   const filtres = [
     { id: 'all', label: 'Tous', color: '#38bdf8' },
-    ...competences.map((c) => ({ id: c.id, label: c.code, color: c.color, titre: c.titre })),
+    ...competences.map((c) => ({ id: c.id, label: c.verbe, color: c.color, titre: c.titre })),
   ]
 
   const liste =

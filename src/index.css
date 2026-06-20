@@ -1,31 +1,30 @@
 @import "tailwindcss";
 
 /* ----------------------------------------------------------------------------
-   Design tokens — langage visuel inspiré d'Apple / Tesla
-   Clair, typographie système (SF Pro / Segoe), hairlines, beaucoup d'espace.
-   Les noms de tokens sont conservés (compat utilitaires) avec de nouvelles valeurs.
+   Design tokens — thème SOMBRE premium (inspiration Apple dark / Linear)
+   Les noms de tokens sont conservés (les utilitaires bg-*, text-*… suivent).
 ---------------------------------------------------------------------------- */
 @theme {
   /* Surfaces & texte */
-  --color-bg: #ffffff;
-  --color-surface: #ffffff;
-  --color-surface-2: #f5f5f7;   /* gris clair signature Apple */
-  --color-bg-dark: #000000;      /* sections "cinématiques" Tesla */
-  --color-line: #d2d2d7;         /* hairline Apple */
-  --color-ink: #1d1d1f;          /* quasi-noir Apple */
-  --color-ink-soft: #424245;
-  --color-muted: #6e6e73;        /* gris secondaire Apple */
+  --color-bg: #0b0b0f;          /* fond quasi-noir */
+  --color-surface: #15161c;     /* cartes */
+  --color-surface-2: #1d1f28;   /* éléments surélevés / bandes */
+  --color-bg-dark: #000000;     /* sections les plus sombres */
+  --color-line: rgba(255, 255, 255, 0.12);
+  --color-ink: #f4f5f7;         /* texte principal clair */
+  --color-ink-soft: #cbced8;
+  --color-muted: #969aa6;       /* texte secondaire */
 
   /* Accents */
-  --color-brand: #0071e3;        /* bleu Apple */
-  --color-brand-2: #5e5ce6;      /* indigo système */
+  --color-brand: #2997ff;       /* bleu lumineux (lisible sur sombre) */
+  --color-brand-2: #7d7bff;
 
-  /* Couleurs des 3 compétences (palette système, sobre) */
-  --color-c4: #0071e3;  /* Gérer les données     — bleu   */
-  --color-c5: #5e5ce6;  /* Conduire un projet SI  — indigo */
-  --color-c6: #1d9d74;  /* Collaborer / Manager   — vert   */
+  /* Couleurs des 3 compétences */
+  --color-c4: #38bdf8;  /* Gérer les données     — cyan   */
+  --color-c5: #a78bfa;  /* Conduire un projet     — violet */
+  --color-c6: #34d399;  /* Collaborer / Manager   — vert   */
 
-  /* Typographies — pile système (rend SF Pro sur Apple, Segoe sur Windows) */
+  /* Typographies — pile système */
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-display: var(--font-sans);
@@ -40,6 +39,7 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
   }
 
   body {
@@ -58,19 +58,16 @@
     line-height: 1.06;
   }
 
-  ::selection {
-    background: #b3d7ff;
-    color: #000;
-  }
+  ::selection { background: rgba(41, 151, 255, 0.35); color: #fff; }
 
   ::-webkit-scrollbar { width: 12px; height: 12px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
-    background: #c7c7cc;
+    background: rgba(255, 255, 255, 0.16);
     border-radius: 999px;
     border: 3px solid var(--color-bg);
   }
-  ::-webkit-scrollbar-thumb:hover { background: #aeaeb2; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.26); }
 
   :focus-visible {
     outline: 2px solid var(--color-brand);
@@ -96,21 +93,19 @@
     padding-inline: 22px;
   }
 
-  /* Cartes Apple : blanc, hairline, grand rayon */
   .card {
     background: var(--color-surface);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
   }
-  /* Variante sur fond gris : carte gris clair sans bordure */
   .card-soft {
     background: var(--color-surface-2);
     border-radius: var(--radius-card);
   }
 
-  /* Barre de navigation translucide façon Apple */
+  /* Barre de navigation translucide sombre */
   .glass {
-    background: color-mix(in srgb, #ffffff 72%, transparent);
+    background: color-mix(in srgb, #0b0b0f 70%, transparent);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid var(--color-line);
@@ -126,6 +121,7 @@
     font-weight: 500;
     background: var(--color-surface-2);
     color: var(--color-ink-soft);
+    border: 1px solid var(--color-line);
   }
 
   /* Boutons pilule */
@@ -142,25 +138,16 @@
     cursor: pointer;
     white-space: nowrap;
   }
-  .btn-primary {
-    background: var(--color-brand);
-    color: #fff;
-  }
-  .btn-primary:hover { background: #0077ed; transform: translateY(-1px); }
+  .btn-primary { background: var(--color-brand); color: #04121f; }
+  .btn-primary:hover { background: #4aa8ff; transform: translateY(-1px); }
 
-  .btn-ghost {
-    background: var(--color-surface-2);
-    color: var(--color-ink);
-  }
-  .btn-ghost:hover { background: #e8e8ed; }
+  .btn-ghost { background: var(--color-surface-2); color: var(--color-ink); border: 1px solid var(--color-line); }
+  .btn-ghost:hover { background: #262934; }
 
-  .btn-dark {
-    background: var(--color-ink);
-    color: #fff;
-  }
-  .btn-dark:hover { background: #000; transform: translateY(-1px); }
+  /* pilule claire (inverse) pour contraste sur sombre */
+  .btn-light { background: var(--color-ink); color: var(--color-bg); }
+  .btn-light:hover { background: #fff; transform: translateY(-1px); }
 
-  /* CTA façon Tesla (large, capitales, sur sections plein écran) */
   .btn-tesla {
     display: inline-flex;
     align-items: center;
@@ -175,7 +162,6 @@
     transition: all 0.25s ease;
   }
 
-  /* Lien Apple "En savoir plus ›" */
   .link-arrow {
     color: var(--color-brand);
     font-weight: 400;
@@ -195,53 +181,18 @@
 /* ----------------------------------------------------------------------------
    Effets
 ---------------------------------------------------------------------------- */
-
-/* Texte qui s'affichait en dégradé : désormais encre pleine, sobre */
-.text-gradient {
-  color: var(--color-ink);
-}
-
-/* Sections cinématiques plein écran (scroll snap façon Tesla).
-   Activé uniquement sur l'accueil via la classe .snap sur <html>. */
-html.snap {
-  scroll-snap-type: y proximity;
-  scroll-padding-top: 3rem; /* compense la navbar fixe */
-}
-.snap-section {
-  scroll-snap-align: start;
-}
-
-/* Léger voile pour lisibilité du texte sur fond sombre */
-.scrim-bottom::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 100%);
-  pointer-events: none;
-}
-.scrim-top::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 45%);
-  pointer-events: none;
-}
+.text-gradient { color: var(--color-ink); }
 
 /* Bandeau défilant (typographie kinétique) */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-.animate-marquee {
-  animation: marquee var(--mq, 30s) linear infinite;
-}
+.animate-marquee { animation: marquee var(--mq, 30s) linear infinite; }
 .group:hover .animate-marquee { animation-play-state: paused; }
 
-/* Typographie contour (titres audacieux) */
-.text-stroke {
-  -webkit-text-stroke: 1.5px currentColor;
-  color: transparent;
-}
+/* Typographie contour */
+.text-stroke { -webkit-text-stroke: 1.5px currentColor; color: transparent; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

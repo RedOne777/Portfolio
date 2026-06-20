@@ -245,7 +245,7 @@ export default function CompetenceDetail() {
         <Reveal delay={0.08}>
           <div className="card h-full p-6">
             <h2 className="flex items-center gap-2 font-display text-base font-semibold text-ink">
-              <GraduationCap size={18} style={{ color: c.color }} /> SAÉ & mises en situation
+              <GraduationCap size={18} style={{ color: c.color }} /> Projets & mises en situation
             </h2>
             <ul className="mt-4 space-y-2">
               {c.saes.map((s) => (

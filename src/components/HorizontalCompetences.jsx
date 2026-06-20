@@ -37,9 +37,11 @@ function Panel({ c }) {
           <p className="mt-4 max-w-xl text-lg text-muted">{c.tagline}</p>
 
           <ul className="mt-6 grid max-w-xl gap-2.5">
-            {c.apprentissagesCritiques.map((ac) => (
+            {c.apprentissagesCritiques.map((ac, i) => (
               <li key={ac.code} className="flex gap-3 text-[15px] text-ink-soft">
-                <span className="font-semibold" style={{ color: c.color }}>{ac.code}</span>
+                <span className="font-mono text-sm font-semibold" style={{ color: c.color }}>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
                 <span>{ac.texte}</span>
               </li>
             ))}
@@ -69,7 +71,7 @@ export default function HorizontalCompetences() {
     <>
       {/* Desktop : scroll horizontal épinglé */}
       <section ref={ref} className="relative hidden md:block" style={{ height: `${n * 100}vh` }}>
-        <div className="sticky top-0 h-screen overflow-hidden bg-white">
+        <div className="sticky top-0 h-screen overflow-hidden bg-bg">
           {/* En-tête fixe */}
           <div className="container-wide absolute left-1/2 top-16 z-10 -translate-x-1/2">
             <div className="flex items-end justify-between">
@@ -96,7 +98,7 @@ export default function HorizontalCompetences() {
         {competences.map((c) => {
           const Icon = ICONS[c.id] || Database
           return (
-            <div key={c.id} className="border-b border-line px-5 py-14" style={{ background: '#fff' }}>
+            <div key={c.id} className="border-b border-line px-5 py-14">
               <span className="grid h-14 w-14 place-items-center rounded-2xl" style={{ background: c.color, color: '#fff' }}>
                 <Icon size={26} />
               </span>

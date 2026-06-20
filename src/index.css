@@ -227,9 +227,25 @@ html.snap {
   pointer-events: none;
 }
 
+/* Bandeau défilant (typographie kinétique) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee var(--mq, 30s) linear infinite;
+}
+.group:hover .animate-marquee { animation-play-state: paused; }
+
+/* Typographie contour (titres audacieux) */
+.text-stroke {
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .snap-container { scroll-snap-type: none; }
+  .animate-marquee { animation: none; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;

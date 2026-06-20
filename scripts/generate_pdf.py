@@ -30,9 +30,9 @@ FONT_DIR = "/usr/share/fonts/truetype/liberation"
 FONT = "Liberation"
 
 NAVY = (7, 11, 20)
-CYAN = (56, 189, 248)
-VIOLET = (167, 139, 250)
-GREEN = (52, 211, 153)
+CYAN = (0, 113, 227)     # bleu Apple #0071e3 (accent principal)
+VIOLET = (94, 92, 230)   # indigo #5e5ce6
+GREEN = (29, 157, 116)   # vert #1d9d74
 INK = (30, 41, 59)
 MUTED = (100, 116, 139)
 WHITE = (255, 255, 255)

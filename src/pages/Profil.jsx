@@ -33,9 +33,8 @@ export default function Profil() {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="mx-auto"
         >
-          <div className="relative grid h-44 w-44 place-items-center rounded-3xl border border-line bg-surface-2 sm:h-52 sm:w-52">
-            <div className="glow inset-0 h-full w-full" style={{ background: '#38bdf8', opacity: 0.25 }} />
-            <span className="relative font-display text-6xl font-bold text-gradient">{profil.initiales}</span>
+          <div className="grid h-44 w-44 place-items-center rounded-[28px] bg-surface-2 sm:h-52 sm:w-52">
+            <span className="text-6xl font-semibold tracking-tight text-ink">{profil.initiales}</span>
           </div>
         </motion.div>
       </section>
@@ -118,7 +117,7 @@ export default function Profil() {
       <Reveal className="mt-16">
         <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-line bg-surface-2/40 p-6">
           <p className="text-muted">Découvrez la démonstration de mes trois compétences.</p>
-          <Link to="/competences" className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-[#04121f]">
+          <Link to="/competences" className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white">
             Voir les compétences <ArrowRight size={16} />
           </Link>
         </div>

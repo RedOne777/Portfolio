@@ -15,12 +15,6 @@ import NotFound from './pages/NotFound'
 export default function App() {
   return (
     <div className="relative flex min-h-screen flex-col">
-      {/* Décor global */}
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="glow left-[-10%] top-[-10%] h-[36rem] w-[36rem]" style={{ background: '#1d4ed8' }} />
-        <div className="glow right-[-10%] top-[20%] h-[30rem] w-[30rem]" style={{ background: '#7c3aed', opacity: 0.3 }} />
-      </div>
-
       <ScrollToTop />
       <Navbar />
       <main className="flex-1">

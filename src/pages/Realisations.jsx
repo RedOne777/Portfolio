@@ -37,7 +37,7 @@ export default function Realisations() {
               onClick={() => setFiltre(f.id)}
               title={f.titre || 'Tous les projets'}
               className={`rounded-full border px-4 py-2 text-sm font-medium transition-all ${
-                active ? 'text-[#04121f]' : 'text-muted hover:text-ink'
+                active ? 'text-white' : 'text-muted hover:text-ink'
               }`}
               style={
                 active

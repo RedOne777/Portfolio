@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Database, Workflow, Users, ArrowRight } from 'lucide-react'
+import { Database, Workflow, Users, ChevronRight } from 'lucide-react'
 
 const ICONS = { c4: Database, c5: Workflow, c6: Users }
 
@@ -8,44 +8,30 @@ export default function CompetenceCard({ competence: c }) {
   return (
     <Link
       to={`/competences/${c.slug}`}
-      className="card group relative flex flex-col overflow-hidden p-6 transition-all duration-300 hover:-translate-y-1"
-      style={{ boxShadow: '0 1px 0 rgba(255,255,255,0.02) inset' }}
+      className="group flex h-full flex-col rounded-[18px] border border-line bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.22)]"
     >
-      {/* halo coloré */}
-      <div
-        className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-40"
-        style={{ background: c.color }}
-      />
       <div className="flex items-center justify-between">
         <span
-          className="grid h-12 w-12 place-items-center rounded-xl border"
-          style={{ borderColor: `${c.color}55`, background: `${c.color}1a`, color: c.color }}
+          className="grid h-12 w-12 place-items-center rounded-2xl"
+          style={{ background: `${c.color}14`, color: c.color }}
         >
           <Icon size={22} />
         </span>
-        <span
-          className="font-display text-sm font-bold"
-          style={{ color: c.color }}
-        >
+        <span className="text-[13px] font-semibold" style={{ color: c.color }}>
           {c.code}
         </span>
       </div>
 
-      <h3 className="mt-5 text-xl font-bold text-ink">{c.titre}</h3>
-      <p className="mt-1 text-sm font-medium" style={{ color: c.color }}>
+      <h3 className="mt-6 text-[22px] font-semibold tracking-tight text-ink">{c.titre}</h3>
+      <p className="mt-1 text-[14px] font-medium" style={{ color: c.color }}>
         Niveau Confirmé
       </p>
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{c.tagline}</p>
+      <p className="mt-3 flex-1 text-[15px] leading-relaxed text-muted">{c.tagline}</p>
 
-      <div className="mt-5 flex items-center justify-between border-t border-line pt-4">
-        <span className="text-xs text-muted">
-          {c.apprentissagesCritiques.length} apprentissages critiques
-        </span>
-        <span className="inline-flex items-center gap-1 text-sm font-semibold text-ink">
-          Explorer
-          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-        </span>
-      </div>
+      <span className="link-arrow mt-6 text-[15px]">
+        En savoir plus
+        <ChevronRight size={17} className="transition-transform group-hover:translate-x-0.5" />
+      </span>
     </Link>
   )
 }

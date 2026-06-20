@@ -10,7 +10,7 @@ export default function NotFound() {
         <p className="mt-2 text-muted">Cette page n'existe pas ou a été déplacée.</p>
         <Link
           to="/"
-          className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-[#04121f]"
+          className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-white"
         >
           <Home size={18} /> Retour à l'accueil
         </Link>

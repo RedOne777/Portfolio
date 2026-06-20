@@ -20,8 +20,8 @@ from fpdf import FPDF
 URL = sys.argv[1] if len(sys.argv) > 1 else "https://VOTRE-PORTFOLIO.vercel.app"
 
 NAME = "Mohamed Ridwan"
-TITLE = "Étudiant en BUT3 Informatique — Parcours AGED"
-SUBTITLE = "Portfolio de fin de parcours · IUT de Créteil-Vitry (2023–2026)"
+TITLE = "Étudiant en informatique · Apprenti en data chez RATP"
+SUBTITLE = "Portfolio de fin d'études · IUT de Créteil-Vitry (2023–2026)"
 EMAIL = "mohamed.ridwan@outlook.fr"
 LINKEDIN = "linkedin.com/in/mohamed-ridwan"
 GITHUB = "github.com/RedOne777"
@@ -97,11 +97,10 @@ def build():
     pdf.set_text_color(*INK)
     pdf.set_xy(18, 90)
     pdf.set_font(FONT, "", 11)
-    intro = ("Ce portfolio, sous forme d'un site web, démontre — par une analyse "
-             "auto-réflexive appuyée sur des traces concrètes — l'acquisition du "
-             "niveau Confirmé des trois compétences de ma dernière année de BUT "
-             "Informatique, parcours AGED (Administration, Gestion et Exploitation "
-             "des Données).")
+    intro = ("Ce site est mon portfolio de fin d'études. Il démontre, preuves à "
+             "l'appui, l'acquisition du plus haut niveau (dit « Confirmé ») de mes "
+             "trois compétences en informatique, orientées gestion et exploitation "
+             "des données.")
     pdf.multi_cell(174, 6.5, intro)
 
     # ---- Encadré URL ----

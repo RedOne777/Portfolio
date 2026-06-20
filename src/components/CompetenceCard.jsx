@@ -8,7 +8,7 @@ export default function CompetenceCard({ competence: c }) {
   return (
     <Link
       to={`/competences/${c.slug}`}
-      className="group flex h-full flex-col rounded-[18px] border border-line bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.22)]"
+      className="group flex h-full flex-col rounded-[18px] border border-line bg-surface p-7 transition-all duration-300 hover:-translate-y-1 hover:border-white/25"
     >
       <div className="flex items-center justify-between">
         <span

@@ -39,19 +39,19 @@ export const niveaux = [
   {
     numero: 1,
     nom: "Novice",
-    annee: "BUT1",
+    annee: "1ʳᵉ année",
     description: "Découverte et application encadrée des fondamentaux.",
   },
   {
     numero: 2,
     nom: "Intermédiaire",
-    annee: "BUT2",
+    annee: "2ᵉ année",
     description: "Mise en œuvre autonome dans des situations plus complexes.",
   },
   {
     numero: 3,
     nom: "Confirmé",
-    annee: "BUT3",
+    annee: "3ᵉ année (dernière)",
     description:
       "Maîtrise dans des situations professionnelles réelles, avec recul critique et régulation.",
     actuel: true,
@@ -65,7 +65,7 @@ export const chaineStructurante = [
   { cle: "Les familles de situations", valeur: "les contextes de mise en œuvre" },
   { cle: "Les niveaux de compétence", valeur: "des postures de plus en plus complexes" },
   { cle: "Les apprentissages critiques", valeur: "les seuils d'apprentissage transformationnels" },
-  { cle: "Les SAÉ", valeur: "les mises en situation d'apprentissage et d'évaluation" },
+  { cle: "Les mises en situation", valeur: "les projets d'apprentissage et d'évaluation (appelés « SAÉ »)" },
   { cle: "Les ressources", valeur: "savoirs, savoir-faire et savoir-êtres mobilisés" },
 ];
 

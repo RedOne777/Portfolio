@@ -13,7 +13,7 @@ import HorizontalCompetences from '../components/HorizontalCompetences'
 
 const KEYWORDS = [
   'Données', 'Décisionnel', 'Big Data', 'SQL', 'Power BI', 'Neo4j',
-  'Qdrant', 'PostGIS', 'Data mining', 'RATP', 'AGED', 'BUT3',
+  'Qdrant', 'PostGIS', 'Data mining', 'Python', 'Cartographie', 'RATP',
 ]
 
 export default function Home() {
@@ -27,13 +27,12 @@ export default function Home() {
       {/* ===================== HERO ===================== */}
       <section
         ref={heroRef}
-        className="relative flex min-h-screen items-center justify-center overflow-hidden bg-white"
+        className="relative flex min-h-screen items-center justify-center overflow-hidden bg-bg"
       >
-        {/* Réseau de données interactif */}
         <div className="pointer-events-none absolute inset-0">
-          <NetworkCanvas nodeColor="#0071e3" lineColor="rgba(15,23,42,0.13)" />
+          <NetworkCanvas nodeColor="#2997ff" lineColor="rgba(255,255,255,0.10)" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-transparent to-white" />
+        <div className="absolute inset-0 bg-gradient-to-b from-bg/70 via-transparent to-bg" />
 
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
@@ -45,7 +44,7 @@ export default function Home() {
             transition={{ duration: 0.7 }}
             className="eyebrow"
           >
-            Portfolio de fin de parcours · BUT3 Informatique
+            Portfolio de fin d'études en informatique
           </motion.p>
 
           <ScrambleText
@@ -54,19 +53,28 @@ export default function Home() {
             className="mx-auto mt-4 block max-w-5xl text-[46px] font-semibold leading-[1.02] tracking-[-0.03em] text-ink sm:text-[78px] lg:text-[96px]"
           />
 
+          {/* Deux lignes distinctes : Étudiant / Apprenti */}
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.5 }}
-            className="mx-auto mt-6 max-w-2xl text-xl text-ink-soft sm:text-2xl"
+            className="mx-auto mt-6 text-xl text-ink-soft sm:text-2xl"
           >
-            {profil.titre}. <span className="text-muted">{profil.sousTitre}.</span>
+            {profil.titre}
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.62 }}
+            className="mx-auto mt-1 text-lg text-muted sm:text-xl"
+          >
+            {profil.sousTitre}
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.65 }}
+            transition={{ duration: 0.9, delay: 0.75 }}
             className="mt-9 flex flex-wrap items-center justify-center gap-4"
           >
             <Magnetic>
@@ -76,7 +84,7 @@ export default function Home() {
             </Magnetic>
             <Magnetic strength={0.2}>
               <Link to="/demarche" className="link-arrow text-[17px]">
-                La démarche portfolio <ChevronRight size={16} />
+                Comment lire ce site <ChevronRight size={16} />
               </Link>
             </Magnetic>
           </motion.div>
@@ -95,7 +103,7 @@ export default function Home() {
       </section>
 
       {/* ===================== BANDEAU KINÉTIQUE ===================== */}
-      <div className="border-y border-ink bg-ink py-5 text-white">
+      <div className="border-y border-line bg-surface-2 py-5 text-ink">
         <Marquee
           items={KEYWORDS}
           duration={32}
@@ -106,14 +114,14 @@ export default function Home() {
       {/* ===================== COMPÉTENCES (scroll horizontal) ===================== */}
       <HorizontalCompetences />
 
-      {/* ===================== FIL ROUGE RATP (sombre) ===================== */}
+      {/* ===================== FIL ROUGE RATP (le plus sombre) ===================== */}
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black text-white">
         <div className="pointer-events-none absolute inset-0">
           <NetworkCanvas nodeColor="#38bdf8" lineColor="rgba(255,255,255,0.10)" density={0.00008} />
         </div>
         <div
           className="absolute inset-0"
-          style={{ background: 'radial-gradient(120% 80% at 50% 30%, rgba(10,37,64,0.6) 0%, #000 65%)' }}
+          style={{ background: 'radial-gradient(120% 80% at 50% 30%, rgba(10,37,64,0.55) 0%, #000 65%)' }}
         />
         <div className="container-px relative z-10 text-center">
           <RevealText>
@@ -148,11 +156,11 @@ export default function Home() {
       </section>
 
       {/* ===================== CTA ===================== */}
-      <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-white py-28">
-        <div className="pointer-events-none absolute inset-0 opacity-60">
-          <NetworkCanvas nodeColor="#1d9d74" lineColor="rgba(15,23,42,0.10)" density={0.00007} />
+      <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-bg py-28">
+        <div className="pointer-events-none absolute inset-0 opacity-70">
+          <NetworkCanvas nodeColor="#34d399" lineColor="rgba(255,255,255,0.08)" density={0.00007} />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white" />
+        <div className="absolute inset-0 bg-gradient-to-b from-bg/70 via-transparent to-bg" />
         <div className="container-px relative z-10 text-center">
           <RevealText>
             <h2 className="mx-auto max-w-3xl text-[44px] font-semibold tracking-tight text-ink sm:text-[72px]">
@@ -161,7 +169,7 @@ export default function Home() {
           </RevealText>
           <Reveal delay={0.15}>
             <p className="mx-auto mt-5 max-w-xl text-lg text-muted">
-              Une question sur mon parcours, mon alternance ou une opportunité ?
+              Une question sur mon parcours, mon apprentissage ou une opportunité ?
             </p>
           </Reveal>
           <Reveal delay={0.25}>

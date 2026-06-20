@@ -19,7 +19,7 @@ export default function Navbar() {
     <header className="glass fixed inset-x-0 top-0 z-50">
       <nav className="container-wide flex h-12 items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5">
-          <span className="grid h-7 w-7 place-items-center rounded-lg bg-ink text-[11px] font-semibold text-white">
+          <span className="grid h-7 w-7 place-items-center rounded-lg bg-ink text-[11px] font-semibold text-bg">
             {profil.initiales}
           </span>
           <span className="text-[15px] font-semibold tracking-tight text-ink">
@@ -36,7 +36,7 @@ export default function Navbar() {
           ))}
           <Link
             to="/contact"
-            className="rounded-full bg-ink px-3.5 py-1.5 text-[13px] font-medium text-white transition-colors hover:bg-black"
+            className="rounded-full bg-ink px-3.5 py-1.5 text-[13px] font-medium text-bg transition-opacity hover:opacity-90"
           >
             Contact
           </Link>

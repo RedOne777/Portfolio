@@ -8,7 +8,7 @@ appuyée sur des traces, l'acquisition du **niveau Confirmé** des 3 compétence
 - **C5 — Conduire un projet** (système d'information)
 - **C6 — Collaborer au sein d'une équipe informatique** (manager)
 
-> 🌐 **Site en ligne** : _à compléter après déploiement_ (voir « Déploiement »)
+> 🌐 **Site en ligne** : **https://ridwan-dev.fr**
 
 ---
 

@@ -6,7 +6,7 @@ const codeOf = (id) => competences.find((c) => c.id === id)
 
 export default function ProjectCard({ projet: p }) {
   return (
-    <article className="flex h-full flex-col rounded-[18px] border border-line bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.22)]">
+    <article className="flex h-full flex-col rounded-[18px] border border-line bg-surface p-7 transition-all duration-300 hover:-translate-y-1 hover:border-white/25">
       <div className="flex items-center justify-between gap-3">
         <span className="chip">{p.categorie}</span>
         <span className="text-[13px] text-muted">{p.periode}</span>

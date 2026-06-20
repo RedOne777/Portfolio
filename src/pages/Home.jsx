@@ -1,90 +1,92 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ChevronRight, ChevronDown, ArrowRight, Database, Workflow, Users } from 'lucide-react'
+import { ChevronRight, ChevronDown, ArrowRight } from 'lucide-react'
 import { profil } from '../data/site'
-import { competences } from '../data/competences'
 import Reveal from '../components/Reveal'
+import RevealText from '../components/RevealText'
+import ScrambleText from '../components/ScrambleText'
+import NetworkCanvas from '../components/NetworkCanvas'
+import Marquee from '../components/Marquee'
+import Magnetic from '../components/Magnetic'
+import HorizontalCompetences from '../components/HorizontalCompetences'
 
-const ICONS = { c4: Database, c5: Workflow, c6: Users }
+const KEYWORDS = [
+  'Données', 'Décisionnel', 'Big Data', 'SQL', 'Power BI', 'Neo4j',
+  'Qdrant', 'PostGIS', 'Data mining', 'RATP', 'AGED', 'BUT3',
+]
 
 export default function Home() {
-  // Active le scroll-snap uniquement sur l'accueil
-  useEffect(() => {
-    document.documentElement.classList.add('snap')
-    return () => document.documentElement.classList.remove('snap')
-  }, [])
-
   const heroRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  })
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 140])
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0])
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.95])
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 120])
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0])
 
   return (
     <>
-      {/* ===================== ÉCRAN 1 — HERO ===================== */}
+      {/* ===================== HERO ===================== */}
       <section
         ref={heroRef}
-        className="snap-section relative flex min-h-screen items-center justify-center overflow-hidden"
+        className="relative flex min-h-screen items-center justify-center overflow-hidden bg-white"
       >
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-white to-surface-2" />
-        <div
-          className="absolute left-1/2 top-1/3 -z-10 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full opacity-[0.07]"
-          style={{ background: 'radial-gradient(circle, #0071e3 0%, transparent 60%)' }}
-        />
+        {/* Réseau de données interactif */}
+        <div className="pointer-events-none absolute inset-0">
+          <NetworkCanvas nodeColor="#0071e3" lineColor="rgba(15,23,42,0.13)" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-transparent to-white" />
 
         <motion.div
-          style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
-          className="container-px py-28 text-center"
+          style={{ y: heroY, opacity: heroOpacity }}
+          className="container-px relative z-10 py-28 text-center"
         >
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7 }}
             className="eyebrow"
           >
             Portfolio de fin de parcours · BUT3 Informatique
           </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto mt-4 max-w-4xl text-[44px] font-semibold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[72px] lg:text-[88px]"
-          >
-            {profil.prenom} {profil.nom}
-          </motion.h1>
+
+          <ScrambleText
+            as="h1"
+            text={`${profil.prenom} ${profil.nom}`}
+            className="mx-auto mt-4 block max-w-5xl text-[46px] font-semibold leading-[1.02] tracking-[-0.03em] text-ink sm:text-[78px] lg:text-[96px]"
+          />
+
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto mt-5 max-w-2xl text-xl text-ink-soft sm:text-2xl"
+            transition={{ duration: 0.9, delay: 0.5 }}
+            className="mx-auto mt-6 max-w-2xl text-xl text-ink-soft sm:text-2xl"
           >
             {profil.titre}. <span className="text-muted">{profil.sousTitre}.</span>
           </motion.p>
+
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.9, delay: 0.65 }}
             className="mt-9 flex flex-wrap items-center justify-center gap-4"
           >
-            <Link to="/competences" className="btn btn-primary">
-              Découvrir mes compétences <ChevronRight size={17} />
-            </Link>
-            <Link to="/demarche" className="link-arrow text-[17px]">
-              La démarche portfolio <ChevronRight size={16} />
-            </Link>
+            <Magnetic>
+              <Link to="/competences" className="btn btn-primary">
+                Découvrir mes compétences <ChevronRight size={17} />
+              </Link>
+            </Magnetic>
+            <Magnetic strength={0.2}>
+              <Link to="/demarche" className="link-arrow text-[17px]">
+                La démarche portfolio <ChevronRight size={16} />
+              </Link>
+            </Magnetic>
           </motion.div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.1, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted"
+          transition={{ delay: 1.4, duration: 1 }}
+          className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-muted"
         >
           <motion.div animate={{ y: [0, 7, 0] }} transition={{ repeat: Infinity, duration: 1.8 }}>
             <ChevronDown size={22} />
@@ -92,104 +94,83 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ===================== ÉCRANS 2-4 — COMPÉTENCES ===================== */}
-      {competences.map((c, i) => {
-        const Icon = ICONS[c.id] || Database
-        return (
-          <section
-            key={c.id}
-            className="snap-section relative flex min-h-screen items-center justify-center overflow-hidden"
-            style={{ background: i % 2 === 0 ? '#ffffff' : 'var(--color-surface-2)' }}
-          >
-            {/* filigrane code */}
-            <span
-              className="pointer-events-none absolute select-none text-[34vw] font-bold leading-none tracking-tighter sm:text-[24vw]"
-              style={{ color: c.color, opacity: 0.05 }}
-              aria-hidden="true"
-            >
-              {c.code}
-            </span>
-            {/* teinte radiale */}
-            <div
-              className="pointer-events-none absolute left-1/2 top-1/2 h-[36rem] w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full"
-              style={{ background: `radial-gradient(circle, ${c.color}14 0%, transparent 60%)` }}
-            />
+      {/* ===================== BANDEAU KINÉTIQUE ===================== */}
+      <div className="border-y border-ink bg-ink py-5 text-white">
+        <Marquee
+          items={KEYWORDS}
+          duration={32}
+          className="text-2xl font-semibold uppercase tracking-tight sm:text-3xl"
+        />
+      </div>
 
-            <div className="container-px relative z-10 text-center">
-              <Reveal>
-                <span
-                  className="mx-auto grid h-16 w-16 place-items-center rounded-2xl"
-                  style={{ background: `${c.color}1a`, color: c.color }}
-                >
-                  <Icon size={30} />
-                </span>
-                <p className="mt-6 text-sm font-semibold tracking-wide" style={{ color: c.color }}>
-                  Compétence {c.code.replace('C', '')} · Niveau Confirmé
-                </p>
-                <h2 className="mx-auto mt-3 max-w-4xl text-[40px] font-semibold leading-[1.06] tracking-tight text-ink sm:text-[64px] lg:text-[76px]">
-                  {c.titre}
-                </h2>
-                <p className="mx-auto mt-6 max-w-2xl text-lg text-muted sm:text-xl">{c.tagline}</p>
-                <p className="mt-5 text-sm text-muted">
-                  {c.apprentissagesCritiques.length} apprentissages critiques ·{' '}
-                  {c.composantesEssentielles.length} composantes essentielles
-                </p>
-                <Link
-                  to={`/competences/${c.slug}`}
-                  className="btn mt-9 text-white"
-                  style={{ background: c.color }}
-                >
-                  Explorer la compétence <ChevronRight size={17} />
-                </Link>
-              </Reveal>
-            </div>
-          </section>
-        )
-      })}
+      {/* ===================== COMPÉTENCES (scroll horizontal) ===================== */}
+      <HorizontalCompetences />
 
-      {/* ===================== ÉCRAN 5 — FIL ROUGE RATP (sombre) ===================== */}
-      <section className="snap-section relative flex min-h-screen items-center justify-center overflow-hidden bg-black text-white">
+      {/* ===================== FIL ROUGE RATP (sombre) ===================== */}
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black text-white">
+        <div className="pointer-events-none absolute inset-0">
+          <NetworkCanvas nodeColor="#38bdf8" lineColor="rgba(255,255,255,0.10)" density={0.00008} />
+        </div>
         <div
-          className="absolute inset-0 opacity-70"
-          style={{ background: 'radial-gradient(120% 80% at 50% 0%, #0a2540 0%, #000 60%)' }}
+          className="absolute inset-0"
+          style={{ background: 'radial-gradient(120% 80% at 50% 30%, rgba(10,37,64,0.6) 0%, #000 65%)' }}
         />
         <div className="container-px relative z-10 text-center">
-          <Reveal>
+          <RevealText>
             <p className="eyebrow text-white/60">Le fil rouge</p>
+          </RevealText>
+          <RevealText delay={0.08}>
             <h2 className="mx-auto mt-4 max-w-4xl text-[36px] font-semibold leading-[1.08] tracking-tight sm:text-[64px]">
               Deux ans chez <span className="text-white">RATP Infrastructure</span>.
             </h2>
+          </RevealText>
+          <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-white/70 sm:text-xl">
               De l'analyse de bases de données en production à la modernisation d'un système
               d'archivage critique : un cas réel qui relie mes trois compétences.
             </p>
+          </Reveal>
+          <Reveal delay={0.3}>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <Link to="/realisations" className="btn btn-tesla bg-white text-black hover:bg-white/90">
-                Voir les réalisations
-              </Link>
-              <Link to="/parcours" className="btn btn-tesla border border-white/40 text-white hover:bg-white/10">
-                Mon parcours
-              </Link>
+              <Magnetic>
+                <Link to="/realisations" className="btn btn-tesla bg-white text-black hover:bg-white/90">
+                  Voir les réalisations
+                </Link>
+              </Magnetic>
+              <Magnetic>
+                <Link to="/parcours" className="btn btn-tesla border border-white/40 text-white hover:bg-white/10">
+                  Mon parcours
+                </Link>
+              </Magnetic>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ===================== ÉCRAN 6 — CTA ===================== */}
-      <section className="snap-section relative flex min-h-screen items-center justify-center bg-white">
-        <div className="container-px text-center">
-          <Reveal>
-            <p className="eyebrow">Démarche réflexive · niveau Confirmé</p>
-            <h2 className="mx-auto mt-4 max-w-3xl text-[40px] font-semibold tracking-tight text-ink sm:text-[64px]">
-              Échangeons.
+      {/* ===================== CTA ===================== */}
+      <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-white py-28">
+        <div className="pointer-events-none absolute inset-0 opacity-60">
+          <NetworkCanvas nodeColor="#1d9d74" lineColor="rgba(15,23,42,0.10)" density={0.00007} />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white" />
+        <div className="container-px relative z-10 text-center">
+          <RevealText>
+            <h2 className="mx-auto max-w-3xl text-[44px] font-semibold tracking-tight text-ink sm:text-[72px]">
+              <ScrambleText text="Échangeons." />
             </h2>
+          </RevealText>
+          <Reveal delay={0.15}>
             <p className="mx-auto mt-5 max-w-xl text-lg text-muted">
               Une question sur mon parcours, mon alternance ou une opportunité ?
             </p>
+          </Reveal>
+          <Reveal delay={0.25}>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-              <Link to="/contact" className="btn btn-primary">
-                Me contacter <ArrowRight size={17} />
-              </Link>
+              <Magnetic>
+                <Link to="/contact" className="btn btn-primary">
+                  Me contacter <ArrowRight size={17} />
+                </Link>
+              </Magnetic>
               <Link to="/profil" className="link-arrow text-[17px]">
                 En savoir plus sur moi <ChevronRight size={16} />
               </Link>

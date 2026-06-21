@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Home, User, Compass, Layers, Briefcase, GraduationCap, Mail, X, LayoutGrid } from 'lucide-react'
 import { profil } from '../data/site'
+import LogoMark from './LogoMark'
 
 const NAV = [
   { to: '/', label: 'Accueil', icon: Home },
@@ -20,9 +21,7 @@ const DOCK = [NAV[0], NAV[3], NAV[4], NAV[6]]
 
 const Logo = () => (
   <Link to="/" className="flex items-center gap-2.5">
-    <span className="grid h-7 w-7 place-items-center rounded-lg bg-ink text-[11px] font-semibold text-bg">
-      {profil.initiales}
-    </span>
+    <LogoMark size={30} />
     <span className="text-[15px] font-semibold tracking-tight text-ink">{profil.nomComplet}</span>
   </Link>
 )

@@ -7,6 +7,17 @@ import {
 import { competences, competenceBySlug } from '../data/competences'
 import { echelleEvaluation } from '../data/demarche'
 import Reveal from '../components/Reveal'
+import SectionNav from '../components/SectionNav'
+
+const SECTIONS = [
+  { id: 'apercu', label: 'Aperçu' },
+  { id: 'niveau', label: 'Mon niveau' },
+  { id: 'composantes', label: 'Composantes' },
+  { id: 'apprentissages', label: 'Apprentissages' },
+  { id: 'traces', label: 'Preuves' },
+  { id: 'ressources', label: 'Ressources' },
+  { id: 'bilan', label: 'Bilan' },
+]
 
 const ICONS = { c4: Database, c5: Workflow, c6: Users }
 
@@ -44,6 +55,7 @@ export default function CompetenceDetail() {
 
       {/* En-tête */}
       <motion.header
+        id="apercu"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -65,6 +77,8 @@ export default function CompetenceDetail() {
         </div>
         <p className="mt-4 max-w-3xl text-lg text-muted">{c.tagline}</p>
       </motion.header>
+
+      <SectionNav sections={SECTIONS} accent={c.color} />
 
       {/* Définition + situations pro */}
       <section className="mt-10 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
@@ -94,7 +108,7 @@ export default function CompetenceDetail() {
 
       {/* Auto-positionnement */}
       <Reveal className="mt-6">
-        <div className="card p-6 sm:p-8">
+        <div id="niveau" className="card p-6 sm:p-8">
           <div className="flex flex-wrap items-center gap-3">
             <span className="grid h-10 w-10 place-items-center rounded-xl border border-line bg-surface-2" style={{ color: c.color }}>
               <Gauge size={20} />
@@ -131,7 +145,7 @@ export default function CompetenceDetail() {
       </Reveal>
 
       {/* Composantes essentielles */}
-      <section className="mt-16">
+      <section id="composantes" className="mt-16">
         <h2 className="font-display text-2xl font-bold text-ink">Composantes essentielles</h2>
         <p className="mt-2 text-muted">Les critères qualité indissociables de la compétence — chacun doit être validé.</p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -149,7 +163,7 @@ export default function CompetenceDetail() {
       </section>
 
       {/* Apprentissages critiques */}
-      <section className="mt-16">
+      <section id="apprentissages" className="mt-16">
         <h2 className="font-display text-2xl font-bold text-ink">Apprentissages critiques</h2>
         <p className="mt-2 text-muted">Les seuils d'apprentissage qui définissent le niveau Confirmé.</p>
         <div className="mt-6 space-y-3">
@@ -167,7 +181,7 @@ export default function CompetenceDetail() {
       </section>
 
       {/* Traces / preuves */}
-      <section className="mt-16">
+      <section id="traces" className="mt-16">
         <h2 className="font-display text-2xl font-bold text-ink">Traces & analyse réflexive</h2>
         <p className="mt-2 max-w-3xl text-muted">
           Les preuves concrètes de ma montée en compétence, analysées au regard des apprentissages
@@ -229,7 +243,7 @@ export default function CompetenceDetail() {
       </section>
 
       {/* Ressources & SAÉ */}
-      <section className="mt-16 grid gap-6 md:grid-cols-2">
+      <section id="ressources" className="mt-16 grid gap-6 md:grid-cols-2">
         <Reveal>
           <div className="card h-full p-6">
             <h2 className="flex items-center gap-2 font-display text-base font-semibold text-ink">
@@ -260,7 +274,7 @@ export default function CompetenceDetail() {
       </section>
 
       {/* Bilan & pistes */}
-      <section className="mt-16 grid gap-6 lg:grid-cols-2">
+      <section id="bilan" className="mt-16 grid gap-6 lg:grid-cols-2">
         <Reveal>
           <div className="card h-full p-6">
             <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-ink">

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Mail } from 'lucide-react'
 import { Github, Linkedin } from './BrandIcons'
+import LogoMark from './LogoMark'
 import { profil, contact, navLinks } from '../data/site'
 
 export default function Footer() {
@@ -11,9 +12,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.6fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2.5">
-              <span className="grid h-7 w-7 place-items-center rounded-lg bg-ink text-[11px] font-semibold text-bg">
-                {profil.initiales}
-              </span>
+              <LogoMark size={30} />
               <span className="text-[15px] font-semibold tracking-tight text-ink">
                 {profil.nomComplet}
               </span>

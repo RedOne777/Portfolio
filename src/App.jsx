@@ -22,7 +22,7 @@ export default function App() {
 
   // Défilement fluide (inertie) — desktop ; tactile natif sur mobile.
   useEffect(() => {
-    const lenis = new Lenis({ duration: 1.05, smoothWheel: true })
+    const lenis = new Lenis({ duration: 1.05, smoothWheel: true, anchors: { offset: -100 } })
     lenisRef.current = lenis
     let raf
     const loop = (t) => { lenis.raf(t); raf = requestAnimationFrame(loop) }
@@ -42,6 +42,7 @@ export default function App() {
 
   return (
     <div className="relative flex min-h-screen flex-col">
+      <div className="grain-layer pointer-events-none fixed inset-0 -z-10" aria-hidden="true" />
       <ScrollProgress />
       <Cursor />
       <Navbar />

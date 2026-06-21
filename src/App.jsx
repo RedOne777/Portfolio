@@ -33,6 +33,8 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      {/* Espace pour le dock mobile flottant */}
+      <div className="h-24 lg:hidden" />
     </div>
   )
 }

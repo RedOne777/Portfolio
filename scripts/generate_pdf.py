@@ -75,7 +75,7 @@ def build():
     pdf.set_font(FONT, "B", 16)
     pdf.set_text_color(*CYAN)
     pdf.set_xy(18, 25.5)
-    pdf.cell(18, 7, "MR", align="C")
+    pdf.cell(18, 7, "R", align="C")
 
     # Nom + titres
     pdf.set_xy(42, 19)

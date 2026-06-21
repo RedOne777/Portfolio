@@ -5,24 +5,24 @@
    Les noms de tokens sont conservés (les utilitaires bg-*, text-*… suivent).
 ---------------------------------------------------------------------------- */
 @theme {
-  /* Surfaces & texte */
-  --color-bg: #0b0b0f;          /* fond quasi-noir */
-  --color-surface: #15161c;     /* cartes */
-  --color-surface-2: #1d1f28;   /* éléments surélevés / bandes */
-  --color-bg-dark: #000000;     /* sections les plus sombres */
-  --color-line: rgba(255, 255, 255, 0.12);
-  --color-ink: #f4f5f7;         /* texte principal clair */
-  --color-ink-soft: #cbced8;
-  --color-muted: #969aa6;       /* texte secondaire */
+  /* Surfaces & texte — charcoal doux légèrement teinté (ni noir, ni clair) */
+  --color-bg: #17181d;
+  --color-surface: #1e2027;
+  --color-surface-2: #282b34;
+  --color-bg-dark: #101116;     /* sections les plus profondes (pas de noir pur) */
+  --color-line: rgba(255, 255, 255, 0.10);
+  --color-ink: #edeef2;
+  --color-ink-soft: #c4c7d0;
+  --color-muted: #969aa6;
 
   /* Accents */
-  --color-brand: #2997ff;       /* bleu lumineux (lisible sur sombre) */
-  --color-brand-2: #7d7bff;
+  --color-brand: #3b8cff;       /* bleu adouci */
+  --color-brand-2: #8b7bff;
 
   /* Couleurs des 3 compétences */
-  --color-c4: #38bdf8;  /* Gérer les données     — cyan   */
-  --color-c5: #a78bfa;  /* Conduire un projet     — violet */
-  --color-c6: #34d399;  /* Collaborer / Manager   — vert   */
+  --color-c4: #38bdf8;
+  --color-c5: #a78bfa;
+  --color-c6: #34d399;
 
   /* Typographies — pile système */
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
@@ -44,12 +44,22 @@
 
   body {
     background-color: var(--color-bg);
+    background-image:
+      radial-gradient(900px 520px at 80% -5%, rgba(139, 123, 255, 0.07), transparent 60%),
+      radial-gradient(1000px 600px at 15% 0%, rgba(59, 140, 255, 0.06), transparent 55%);
+    background-attachment: fixed;
     color: var(--color-ink);
     font-family: var(--font-sans);
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+  }
+
+  /* Couche de grain (texture) — utilisée via <div class="grain-layer"> au fond de l'app */
+  .grain-layer {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.04;
   }
 
   h1, h2, h3, h4 {
@@ -193,6 +203,18 @@
 
 /* Typographie contour */
 .text-stroke { -webkit-text-stroke: 1.5px currentColor; color: transparent; }
+
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Décalage d'ancrage pour ne pas masquer les titres sous la barre fixe */
+[id] { scroll-margin-top: 100px; }
+
+/* Smooth scroll (Lenis) */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

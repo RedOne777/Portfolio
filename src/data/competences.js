@@ -333,3 +333,66 @@ export const competences = [
 
 // Accès rapide par slug (utilisé par la page de détail)
 export const competenceBySlug = (slug) => competences.find((c) => c.slug === slug);
+
+// ---------------------------------------------------------------------------
+// VUE D'ENSEMBLE — les 6 compétences acquises sur les 3 ans, en langage simple.
+// niveauNum : 1 = Novice, 2 = Intermédiaire, 3 = Confirmé (le plus avancé).
+// Les 3 compétences "focus" (niveau Confirmé) ont une page détaillée.
+// ---------------------------------------------------------------------------
+export const toutesLesCompetences = [
+  {
+    code: "C1",
+    titre: "Réaliser une application",
+    plain: "Concevoir et programmer une application qui répond à un besoin précis.",
+    niveau: "Intermédiaire",
+    niveauNum: 2,
+    color: "#94a3b8",
+  },
+  {
+    code: "C2",
+    titre: "Optimiser une application",
+    plain: "Rendre un programme plus rapide, plus fiable et moins gourmand en ressources.",
+    niveau: "Intermédiaire",
+    niveauNum: 2,
+    color: "#94a3b8",
+  },
+  {
+    code: "C3",
+    titre: "Administrer systèmes & réseaux",
+    plain: "Installer, sécuriser et maintenir des serveurs et des réseaux informatiques.",
+    niveau: "Intermédiaire",
+    niveauNum: 2,
+    color: "#94a3b8",
+  },
+  {
+    code: "C4",
+    titre: "Gérer les données",
+    plain: "Modéliser, fiabiliser et exploiter les données pour aider à la décision.",
+    niveau: "Confirmé",
+    niveauNum: 3,
+    color: "#38bdf8",
+    focus: true,
+    slug: "gerer-les-donnees",
+  },
+  {
+    code: "C5",
+    titre: "Conduire un projet",
+    plain: "Organiser un projet informatique et l'intégrer dans une entreprise.",
+    niveau: "Confirmé",
+    niveauNum: 3,
+    color: "#a78bfa",
+    focus: true,
+    slug: "conduire-un-projet",
+  },
+  {
+    code: "C6",
+    titre: "Collaborer en équipe",
+    plain: "Travailler en équipe, communiquer et accompagner le changement.",
+    niveau: "Confirmé",
+    niveauNum: 3,
+    color: "#34d399",
+    focus: true,
+    slug: "collaborer-manager",
+  },
+];
+

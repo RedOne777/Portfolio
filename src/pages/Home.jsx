@@ -20,10 +20,13 @@ const KEYWORDS = [
 
 // Étiquettes "tokens" flottantes (façon design system) — côté droit du hero
 const PILLS = [
-  { label: 'role = "apprenti.data"', color: '#3b8cff', cls: 'right-[8%] top-[20%]', d: 6 },
-  { label: 'skill.data = "confirmé"', color: '#38bdf8', cls: 'right-[14%] top-[40%]', d: 7.5 },
-  { label: 'stack = [sql, python, neo4j]', color: '#a78bfa', cls: 'right-[6%] top-[60%]', d: 6.8 },
-  { label: 'org = "ratp.infra"', color: '#34d399', cls: 'right-[18%] top-[78%]', d: 8 },
+  { label: 'role = "apprenti.data"', color: '#2563eb', cls: 'right-[8%] top-[15%]', d: 6 },
+  { label: 'skill.data = "confirmé"', color: '#0ea5e9', cls: 'right-[16%] top-[33%]', d: 7.5 },
+  { label: 'theme = "sky.light"', color: '#7c3aed', cls: 'right-[5%] top-[46%]', d: 6.2 },
+  { label: 'stack = [sql, python, neo4j]', color: '#2563eb', cls: 'right-[13%] top-[62%]', d: 6.8 },
+  { label: 'org = "ratp.infra"', color: '#059669', cls: 'right-[22%] top-[78%]', d: 8 },
+  { label: 'view = "portfolio.2026"', color: '#0ea5e9', cls: 'left-[42%] top-[14%]', d: 7 },
+  { label: 'lang = ["fr", "en"]', color: '#7c3aed', cls: 'right-[30%] top-[40%]', d: 6.5 },
 ]
 
 export default function Home() {
@@ -37,7 +40,7 @@ export default function Home() {
       {/* ===================== HERO (ancré à gauche) ===================== */}
       <section
         ref={heroRef}
-        className="relative flex min-h-screen items-center overflow-hidden"
+        className="relative flex min-h-screen items-end overflow-hidden"
         style={{ background: 'linear-gradient(180deg, #a6c8fb 0%, #cfe0fa 38%, #e9eff8 72%, #eef1f7 100%)' }}
       >
         {/* décor : ciel, nuages, phrase gravée, grille */}
@@ -66,9 +69,9 @@ export default function Home() {
 
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
-          className="container-wide relative z-10"
+          className="container-wide relative z-10 pb-24 pt-28"
         >
-          <div className="max-w-3xl">
+          <div className="max-w-2xl">
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
@@ -82,12 +85,12 @@ export default function Home() {
               <ScrambleText
                 as="span"
                 text={profil.prenom}
-                className="block text-[clamp(3.2rem,12vw,8.5rem)]"
+                className="block text-[clamp(2.4rem,7vw,5rem)]"
               />
               <ScrambleText
                 as="span"
                 text={profil.nom}
-                className="block text-[clamp(3.2rem,12vw,8.5rem)]"
+                className="block text-[clamp(2.4rem,7vw,5rem)]"
               />
             </h1>
 
@@ -95,17 +98,17 @@ export default function Home() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.5 }}
-              className="mt-6 font-serif text-[clamp(1.5rem,4vw,2.6rem)] italic leading-tight text-ink-soft"
+              className="mt-5 text-xl text-ink-soft sm:text-2xl"
             >
-              Étudiant en informatique, apprenti en data.
+              {profil.titre}
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.62 }}
-              className="mt-2 font-mono text-sm text-muted"
+              className="mt-1 text-lg text-muted sm:text-xl"
             >
-              {'> '}RATP Infrastructure
+              {profil.sousTitre}
             </motion.p>
 
             <motion.div
@@ -129,7 +132,7 @@ export default function Home() {
         </motion.div>
 
         {/* nuage de premier plan : le nom se fond derrière */}
-        <Cloud className="left-[3%] top-[22%] z-20 h-36 w-[28rem]" opacity={0.6} blur={20} dur={34} />
+        <Cloud className="left-[0%] bottom-[34%] z-20 h-32 w-[26rem]" opacity={0.55} blur={22} dur={34} />
 
         <motion.div
           initial={{ opacity: 0 }}
@@ -171,7 +174,7 @@ export default function Home() {
             </RevealText>
             <RevealText delay={0.08}>
               <h2 className="mt-4 text-[clamp(2.2rem,6vw,4.2rem)] font-semibold leading-[1.05] tracking-tight">
-                Deux ans chez <span className="font-serif italic">RATP Infrastructure</span>.
+                Deux ans chez RATP Infrastructure.
               </h2>
             </RevealText>
             <Reveal delay={0.2}>
@@ -212,7 +215,7 @@ export default function Home() {
               </h2>
             </RevealText>
             <Reveal delay={0.15}>
-              <p className="mt-5 font-serif text-xl italic text-ink-soft">
+              <p className="mt-5 text-xl text-ink-soft">
                 Une question sur mon parcours, mon apprentissage ou une opportunité ?
               </p>
             </Reveal>

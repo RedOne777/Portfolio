@@ -28,7 +28,6 @@
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-display: var(--font-sans);
-  --font-serif: "Instrument Serif", ui-serif, Georgia, "Times New Roman", serif;
 
   --radius-card: 18px;
 }
@@ -207,6 +206,12 @@
 @keyframes drift {
   from { transform: translateX(-26px); }
   to { transform: translateX(26px); }
+}
+
+/* Flottement des éléments géométriques */
+@keyframes float {
+  from { transform: translateY(-12px) rotate(6deg); }
+  to { transform: translateY(12px) rotate(12deg); }
 }
 
 /* Typographie contour */

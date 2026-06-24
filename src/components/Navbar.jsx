@@ -69,7 +69,7 @@ export default function Navbar() {
             <div className="flex justify-end">
               <Link
                 to="/contact"
-                className="rounded-full bg-brand px-4 py-1.5 text-[13px] font-semibold text-[#04121f] transition-transform hover:scale-[1.03]"
+                className="rounded-full bg-brand px-4 py-1.5 text-[13px] font-semibold text-white transition-transform hover:scale-[1.03]"
               >
                 Contact
               </Link>

@@ -47,7 +47,7 @@ function OverviewItem({ c }) {
 
   const base = 'flex h-full flex-col rounded-[18px] border border-line p-6 transition-all duration-300'
   return c.focus ? (
-    <Link to={`/competences/${c.slug}`} className={`${base} bg-surface hover:-translate-y-1 hover:border-white/25`}>
+    <Link to={`/competences/${c.slug}`} className={`${base} bg-surface hover:-translate-y-1 hover:shadow-[0_18px_44px_-20px_rgba(20,24,40,0.25)]`}>
       {inner}
     </Link>
   ) : (

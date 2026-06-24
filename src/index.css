@@ -5,29 +5,30 @@
    Les noms de tokens sont conservés (les utilitaires bg-*, text-*… suivent).
 ---------------------------------------------------------------------------- */
 @theme {
-  /* Surfaces & texte — charcoal doux légèrement teinté (ni noir, ni clair) */
-  --color-bg: #17181d;
-  --color-surface: #1e2027;
-  --color-surface-2: #282b34;
-  --color-bg-dark: #101116;     /* sections les plus profondes (pas de noir pur) */
-  --color-line: rgba(255, 255, 255, 0.10);
-  --color-ink: #edeef2;
-  --color-ink-soft: #c4c7d0;
-  --color-muted: #969aa6;
+  /* Surfaces & texte — clair légèrement teinté bleu (ni blanc plat, ni sombre) */
+  --color-bg: #eef1f7;
+  --color-surface: #ffffff;
+  --color-surface-2: #e5eaf3;
+  --color-bg-dark: #0f1b3d;      /* bleu nuit pour la section cinématique (pas de noir) */
+  --color-line: rgba(20, 24, 40, 0.10);
+  --color-ink: #161922;
+  --color-ink-soft: #3c4350;
+  --color-muted: #697084;
 
   /* Accents */
-  --color-brand: #3b8cff;       /* bleu adouci */
-  --color-brand-2: #8b7bff;
+  --color-brand: #2563eb;        /* bleu franc */
+  --color-brand-2: #7c3aed;
 
-  /* Couleurs des 3 compétences */
-  --color-c4: #38bdf8;
-  --color-c5: #a78bfa;
-  --color-c6: #34d399;
+  /* Couleurs des 3 compétences (lisibles sur fond clair) */
+  --color-c4: #0ea5e9;
+  --color-c5: #7c3aed;
+  --color-c6: #059669;
 
   /* Typographies — pile système */
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-display: var(--font-sans);
+  --font-serif: "Instrument Serif", ui-serif, Georgia, "Times New Roman", serif;
 
   --radius-card: 18px;
 }
@@ -45,8 +46,8 @@
   body {
     background-color: var(--color-bg);
     background-image:
-      radial-gradient(900px 520px at 80% -5%, rgba(139, 123, 255, 0.07), transparent 60%),
-      radial-gradient(1000px 600px at 15% 0%, rgba(59, 140, 255, 0.06), transparent 55%);
+      radial-gradient(900px 540px at 82% -5%, rgba(37, 99, 235, 0.10), transparent 60%),
+      radial-gradient(1000px 620px at 12% 0%, rgba(124, 58, 237, 0.07), transparent 55%);
     background-attachment: fixed;
     color: var(--color-ink);
     font-family: var(--font-sans);
@@ -59,7 +60,8 @@
   /* Couche de grain (texture) — utilisée via <div class="grain-layer"> au fond de l'app */
   .grain-layer {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.04;
+    opacity: 0.045;
+    mix-blend-mode: multiply;
   }
 
   h1, h2, h3, h4 {
@@ -73,11 +75,11 @@
   ::-webkit-scrollbar { width: 12px; height: 12px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.16);
+    background: rgba(20, 24, 40, 0.20);
     border-radius: 999px;
     border: 3px solid var(--color-bg);
   }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.26); }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(20, 24, 40, 0.32); }
 
   :focus-visible {
     outline: 2px solid var(--color-brand);
@@ -115,7 +117,7 @@
 
   /* Barre de navigation translucide sombre */
   .glass {
-    background: color-mix(in srgb, #0b0b0f 70%, transparent);
+    background: color-mix(in srgb, #ffffff 72%, transparent);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid var(--color-line);
@@ -148,8 +150,8 @@
     cursor: pointer;
     white-space: nowrap;
   }
-  .btn-primary { background: var(--color-brand); color: #04121f; }
-  .btn-primary:hover { background: #4aa8ff; transform: translateY(-1px); }
+  .btn-primary { background: var(--color-brand); color: #fff; }
+  .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
 
   .btn-ghost { background: var(--color-surface-2); color: var(--color-ink); border: 1px solid var(--color-line); }
   .btn-ghost:hover { background: #262934; }

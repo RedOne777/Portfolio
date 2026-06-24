@@ -12,7 +12,7 @@ export const projets = [
     titre: "AeroWise",
     sousTitre: "Gestion de la biodiversité aéroportuaire",
     categorie: "Projet universitaire",
-    periode: "BUT3",
+    periode: "3ᵉ année",
     vedette: true,
     description:
       "Plateforme de suivi de la biodiversité sur les emprises aéroportuaires, couplée à un assistant intelligent capable d'interroger des données hétérogènes.",

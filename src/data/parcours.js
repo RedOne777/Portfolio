@@ -5,7 +5,7 @@
 export const formation = [
   {
     periode: "2023 – 2026",
-    titre: "BUT Informatique — Parcours AGED",
+    titre: "BUT Informatique — spécialité Données",
     lieu: "IUT de Créteil-Vitry",
     description:
       "Administration, Gestion et Exploitation des Données. Spécialisation données : bases relationnelles et nouvelle génération, décisionnel, données massives, IA.",

@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Cursor from './components/Cursor'
 import ScrollProgress from './components/ScrollProgress'
+import GlobalBackground from './components/GlobalBackground'
 import Home from './pages/Home'
 import Profil from './pages/Profil'
 import Demarche from './pages/Demarche'
@@ -42,6 +43,7 @@ export default function App() {
 
   return (
     <div className="relative flex min-h-screen flex-col">
+      <GlobalBackground />
       <div className="grain-layer pointer-events-none fixed inset-0 -z-10" aria-hidden="true" />
       <ScrollProgress />
       <Cursor />

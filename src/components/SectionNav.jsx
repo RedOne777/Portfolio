@@ -42,7 +42,7 @@ export default function SectionNav({ sections, accent = '#3b8cff' }) {
                     className="h-2.5 w-2.5 rounded-full transition-all duration-300"
                     style={{
                       background: on ? accent : 'transparent',
-                      border: `1.5px solid ${on ? accent : 'rgba(255,255,255,0.35)'}`,
+                      border: `1.5px solid ${on ? accent : 'rgba(20,24,40,0.30)'}`,
                       transform: on ? 'scale(1.3)' : 'scale(1)',
                       boxShadow: on ? `0 0 10px ${accent}` : 'none',
                     }}

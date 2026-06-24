@@ -34,10 +34,14 @@ export default function Home() {
   return (
     <>
       {/* ===================== HERO (ancré à gauche) ===================== */}
-      <section ref={heroRef} className="relative flex min-h-screen items-center overflow-hidden bg-bg">
+      <section
+        ref={heroRef}
+        className="relative flex min-h-screen items-center overflow-hidden"
+        style={{ background: 'linear-gradient(180deg, #d7e6ff 0%, #e7effb 42%, #eef1f7 100%)' }}
+      >
         {/* réseau de données (atténué) */}
         <div className="pointer-events-none absolute inset-0 opacity-70">
-          <NetworkCanvas nodeColor="#3b8cff" lineColor="rgba(255,255,255,0.09)" density={0.00009} />
+          <NetworkCanvas nodeColor="#2563eb" lineColor="rgba(20,24,40,0.10)" density={0.00009} />
         </div>
 
         {/* lignes de grille (repères) */}
@@ -48,7 +52,7 @@ export default function Home() {
         </div>
 
         {/* dégradé pour lisibilité du texte à gauche */}
-        <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/85 to-bg/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-bg/70 via-bg/25 to-transparent" />
 
         {/* tokens flottants (desktop) */}
         <div className="pointer-events-none absolute inset-0 hidden lg:block">
@@ -159,11 +163,11 @@ export default function Home() {
       {/* ===================== FIL ROUGE RATP (sombre, ancré à gauche) ===================== */}
       <section className="relative flex min-h-screen items-center overflow-hidden bg-bg-dark text-white">
         <div className="pointer-events-none absolute inset-0">
-          <NetworkCanvas nodeColor="#38bdf8" lineColor="rgba(255,255,255,0.09)" density={0.00008} />
+          <NetworkCanvas nodeColor="#7cc3ff" lineColor="rgba(255,255,255,0.10)" density={0.00008} />
         </div>
         <div
           className="absolute inset-0"
-          style={{ background: 'radial-gradient(120% 90% at 10% 30%, rgba(10,37,64,0.55) 0%, #0a0b0f 60%)' }}
+          style={{ background: 'radial-gradient(120% 90% at 12% 25%, rgba(37,99,235,0.32) 0%, #0a1330 62%)' }}
         />
         <div className="container-wide relative z-10">
           <div className="max-w-3xl">
@@ -202,9 +206,9 @@ export default function Home() {
       {/* ===================== CTA (ancré à gauche) ===================== */}
       <section className="relative flex min-h-[70vh] items-center overflow-hidden bg-bg py-28">
         <div className="pointer-events-none absolute inset-0 opacity-70">
-          <NetworkCanvas nodeColor="#34d399" lineColor="rgba(255,255,255,0.08)" density={0.00007} />
+          <NetworkCanvas nodeColor="#059669" lineColor="rgba(20,24,40,0.09)" density={0.00007} />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/85 to-bg/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-bg/70 via-bg/25 to-transparent" />
         <div className="container-wide relative z-10">
           <div className="max-w-2xl">
             <RevealText>

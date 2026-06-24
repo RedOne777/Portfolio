@@ -203,6 +203,12 @@
 .animate-marquee { animation: marquee var(--mq, 30s) linear infinite; }
 .group:hover .animate-marquee { animation-play-state: paused; }
 
+/* Dérive lente des nuages */
+@keyframes drift {
+  from { transform: translateX(-26px); }
+  to { transform: translateX(26px); }
+}
+
 /* Typographie contour */
 .text-stroke { -webkit-text-stroke: 1.5px currentColor; color: transparent; }
 

@@ -7,6 +7,7 @@ import Reveal from '../components/Reveal'
 import RevealText from '../components/RevealText'
 import ScrambleText from '../components/ScrambleText'
 import NetworkCanvas from '../components/NetworkCanvas'
+import SkyScene, { Cloud } from '../components/SkyScene'
 import Marquee from '../components/Marquee'
 import Magnetic from '../components/Magnetic'
 import TokenPill from '../components/TokenPill'
@@ -37,22 +38,13 @@ export default function Home() {
       <section
         ref={heroRef}
         className="relative flex min-h-screen items-center overflow-hidden"
-        style={{ background: 'linear-gradient(180deg, #d7e6ff 0%, #e7effb 42%, #eef1f7 100%)' }}
+        style={{ background: 'linear-gradient(180deg, #a6c8fb 0%, #cfe0fa 38%, #e9eff8 72%, #eef1f7 100%)' }}
       >
-        {/* réseau de données (atténué) */}
-        <div className="pointer-events-none absolute inset-0 opacity-70">
-          <NetworkCanvas nodeColor="#2563eb" lineColor="rgba(20,24,40,0.10)" density={0.00009} />
-        </div>
-
-        {/* lignes de grille (repères) */}
-        <div className="pointer-events-none absolute inset-0 hidden sm:block">
-          <div className="absolute inset-y-0 left-1/4 w-px bg-line" />
-          <div className="absolute inset-y-0 left-1/2 w-px bg-line" />
-          <div className="absolute inset-y-0 left-3/4 w-px bg-line" />
-        </div>
+        {/* décor : ciel, nuages, phrase gravée, grille */}
+        <SkyScene />
 
         {/* dégradé pour lisibilité du texte à gauche */}
-        <div className="absolute inset-0 bg-gradient-to-r from-bg/70 via-bg/25 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-bg/65 via-bg/15 to-transparent" />
 
         {/* tokens flottants (desktop) */}
         <div className="pointer-events-none absolute inset-0 hidden lg:block">
@@ -136,11 +128,14 @@ export default function Home() {
           </div>
         </motion.div>
 
+        {/* nuage de premier plan : le nom se fond derrière */}
+        <Cloud className="left-[3%] top-[22%] z-20 h-36 w-[28rem]" opacity={0.6} blur={20} dur={34} />
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.4, duration: 1 }}
-          className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-muted"
+          className="absolute bottom-8 left-1/2 z-30 -translate-x-1/2 text-muted"
         >
           <motion.div animate={{ y: [0, 7, 0] }} transition={{ repeat: Infinity, duration: 1.8 }}>
             <ChevronDown size={22} />

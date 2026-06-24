@@ -1,3 +1,5 @@
+import Birds from './Birds'
+
 // Décor de ciel : halo, nuages doux (dérive lente), cubes flottants,
 // phrase fondue dans le ciel et lignes de grille. 100% CSS, sans image externe.
 
@@ -50,6 +52,9 @@ export default function SkyScene() {
       <Cloud className="left-[10%] top-[30%] h-36 w-[28rem]" opacity={0.6} blur={26} dur={30} delay={3} />
       <Cloud className="left-[34%] bottom-[10%] h-48 w-[46rem]" opacity={0.6} blur={30} dur={42} delay={1} />
       <Cloud className="right-[14%] bottom-[24%] h-36 w-[26rem]" opacity={0.5} blur={26} dur={38} delay={3} />
+
+      {/* oiseaux */}
+      <Birds dense />
 
       {/* cubes flottants (façon design system) */}
       <Box className="right-[24%] top-[26%] hidden h-16 w-16 lg:block" dur={12} />

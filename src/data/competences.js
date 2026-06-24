@@ -71,7 +71,7 @@ export const competences = [
       {
         titre: "AeroWise — Assistant intelligent sur données hétérogènes",
         contexte: "Projet universitaire — Gestion de la biodiversité aéroportuaire",
-        type: "Projet / SAÉ",
+        type: "Projet universitaire",
         ac: ["AC1", "AC2", "AC3"],
         ce: ["CE3", "CE4"],
         stack: ["PostGIS", "Neo4j", "Qdrant", "Python", "RAG"],
@@ -82,7 +82,7 @@ export const competences = [
       {
         titre: "Analyse démographique de la France (2019) — Tableau de bord décisionnel",
         contexte: "Projet universitaire — Informatique décisionnelle",
-        type: "Projet / SAÉ",
+        type: "Projet universitaire",
         ac: ["AC2", "AC3"],
         ce: ["CE3", "CE4"],
         stack: ["Power BI", "DAX", "Modèle en étoile", "Web"],
@@ -105,7 +105,7 @@ export const competences = [
       {
         titre: "MétéoVision — Restitution de données dynamiques",
         contexte: "Projet universitaire — Tableau de bord météorologique",
-        type: "Projet / SAÉ",
+        type: "Projet universitaire",
         ac: ["AC2", "AC3"],
         ce: ["CE4"],
         stack: ["Web", "Base de données", "Auth", "Data-viz"],
@@ -116,7 +116,7 @@ export const competences = [
       {
         titre: "Cryptographie & sécurité des données — AES et codes correcteurs",
         contexte: "Projet universitaire — Sécurité",
-        type: "Projet / SAÉ",
+        type: "Projet universitaire",
         ac: ["AC4"],
         ce: ["CE1"],
         stack: ["Python", "AES", "Codes détecteurs/correcteurs"],
@@ -196,7 +196,7 @@ export const competences = [
       {
         titre: "AeroWise — Conception et mise en œuvre d'un SI de suivi des incidents",
         contexte: "Projet universitaire — Biodiversité aéroportuaire",
-        type: "Projet / SAÉ",
+        type: "Projet universitaire",
         ac: ["AC2", "AC3"],
         ce: ["CE1", "CE3", "CE4"],
         stack: ["React", "Dashboard", "Cartographie", "Multi-bases"],
@@ -205,15 +205,15 @@ export const competences = [
         preuves: [{ label: "Dépôt GitHub", url: GITHUB }],
       },
       {
-        titre: "SAÉ Data mining — De la donnée brute à l'aide à la décision",
-        contexte: "SAÉ BUT3 — S5.C.01",
-        type: "SAÉ",
+        titre: "Projet Data mining — De la donnée brute à l'aide à la décision",
+        contexte: "Projet de 3ᵉ année",
+        type: "Projet",
         ac: ["AC1", "AC3"],
         ce: ["CE2", "CE3"],
         stack: ["Data mining", "Aide à la décision"],
         analyse:
-          "Cette SAÉ relie l'exploitation décisionnelle des données à un projet SI : adapter le SI pour y intégrer une brique d'aide à la décision (AC3) et mesurer les impacts d'un tel projet (AC1). Elle mobilise le respect des règles juridiques sur les données exploitées (CE2, RGPD) et une réflexion éthique sur leur usage (CE3). [À compléter avec le sujet précis, le jeu de données et les livrables de votre SAÉ.]",
-        preuves: [{ label: "Rapport SAÉ — à relier", url: null }],
+          "Ce projet relie l'exploitation décisionnelle des données à un projet SI : adapter le SI pour y intégrer une brique d'aide à la décision (AC3) et mesurer les impacts d'un tel projet (AC1). Elle mobilise le respect des règles juridiques sur les données exploitées (CE2, RGPD) et une réflexion éthique sur leur usage (CE3). [À compléter avec le sujet précis, le jeu de données et les livrables de votre projet.]",
+        preuves: [{ label: "Rapport — à relier", url: null }],
       },
     ],
     bilan:
@@ -290,7 +290,7 @@ export const competences = [
       {
         titre: "Projets en équipe — Organisation, Git et communication collaborative",
         contexte: "Projets universitaires (AeroWise, MétéoVision…)",
-        type: "Projet / SAÉ",
+        type: "Projet universitaire",
         ac: ["AC4"],
         ce: ["CE1", "CE4"],
         stack: ["Git", "Gestion de projet", "Communication"],
@@ -300,7 +300,7 @@ export const competences = [
       },
       {
         titre: "Veille technologique — Bases de données nouvelle génération & IA",
-        contexte: "Démarche personnelle & ressources BUT3",
+        contexte: "Démarche personnelle",
         type: "Veille",
         ac: ["AC1", "AC2"],
         ce: [],
@@ -311,7 +311,7 @@ export const competences = [
       },
       {
         titre: "Cadre juridique, économique et durable du numérique",
-        contexte: "Ressources BUT3 (Droit, Entrepreneuriat, Éco. durable)",
+        contexte: "Cours (Droit, Entrepreneuriat, Économie durable)",
         type: "Apports théoriques",
         ac: ["AC2"],
         ce: ["CE3"],

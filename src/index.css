@@ -6,9 +6,9 @@
 ---------------------------------------------------------------------------- */
 @theme {
   /* Surfaces & texte — clair légèrement teinté bleu (ni blanc plat, ni sombre) */
-  --color-bg: #eef1f7;
+  --color-bg: #e6ebf3;
   --color-surface: #ffffff;
-  --color-surface-2: #e5eaf3;
+  --color-surface-2: #d8e0ec;
   --color-bg-dark: #0f1b3d;      /* bleu nuit pour la section cinématique (pas de noir) */
   --color-line: rgba(20, 24, 40, 0.10);
   --color-ink: #161922;

@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { ChevronRight, ChevronDown, ArrowRight } from 'lucide-react'
 import { profil } from '../data/site'
 import Reveal from '../components/Reveal'
@@ -8,6 +8,7 @@ import RevealText from '../components/RevealText'
 import ScrambleText from '../components/ScrambleText'
 import NetworkCanvas from '../components/NetworkCanvas'
 import SkyScene, { Cloud } from '../components/SkyScene'
+import { useWeather, useWeatherName } from '../components/WeatherContext'
 import Marquee from '../components/Marquee'
 import Magnetic from '../components/Magnetic'
 import TokenPill from '../components/TokenPill'
@@ -22,7 +23,7 @@ const KEYWORDS = [
 const PILLS = [
   { label: 'role = "apprenti.data"', color: '#2563eb', cls: 'right-[8%] top-[15%]', d: 6 },
   { label: 'skill.data = "confirmé"', color: '#0ea5e9', cls: 'right-[16%] top-[33%]', d: 7.5 },
-  { label: 'theme = "sky.light"', color: '#7c3aed', cls: 'right-[5%] top-[46%]', d: 6.2 },
+  { weather: true, color: '#7c3aed', cls: 'right-[5%] top-[46%]', d: 6.2 },
   { label: 'stack = [sql, python, neo4j]', color: '#2563eb', cls: 'right-[13%] top-[62%]', d: 6.8 },
   { label: 'org = "ratp.infra"', color: '#059669', cls: 'right-[22%] top-[78%]', d: 8 },
   { label: 'view = "portfolio.2026"', color: '#0ea5e9', cls: 'left-[42%] top-[14%]', d: 7 },
@@ -31,6 +32,8 @@ const PILLS = [
 
 export default function Home() {
   const heroRef = useRef(null)
+  const weather = useWeather()
+  const weatherName = useWeatherName()
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 120])
   const heroOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0])
@@ -43,6 +46,19 @@ export default function Home() {
         className="relative flex min-h-screen items-end overflow-hidden"
         style={{ background: 'linear-gradient(180deg, #a6c8fb 0%, #cfe0fa 38%, #e9eff8 72%, #eef1f7 100%)' }}
       >
+        {/* ciel : fondu enchaîné entre les météos */}
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={weatherName}
+            className="absolute inset-0"
+            style={{ background: weather.sky }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2.5, ease: 'easeInOut' }}
+          />
+        </AnimatePresence>
+
         {/* décor : ciel, nuages, phrase gravée, grille */}
         <SkyScene />
 
@@ -53,7 +69,7 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0 hidden lg:block">
           {PILLS.map((p) => (
             <motion.div
-              key={p.label}
+              key={p.cls}
               className={`absolute ${p.cls}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: [0, -12, 0] }}
@@ -62,7 +78,10 @@ export default function Home() {
                 y: { duration: p.d, repeat: Infinity, ease: 'easeInOut' },
               }}
             >
-              <TokenPill label={p.label} color={p.color} />
+              <TokenPill
+                label={p.weather ? `weather = "${weatherName}"` : p.label}
+                color={p.color}
+              />
             </motion.div>
           ))}
         </div>

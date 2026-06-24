@@ -214,6 +214,12 @@
   to { transform: translateY(12px) rotate(12deg); }
 }
 
+/* Pluie */
+@keyframes rainfall {
+  from { transform: translateY(-20vh); }
+  to { transform: translateY(120vh); }
+}
+
 /* Typographie contour */
 .text-stroke { -webkit-text-stroke: 1.5px currentColor; color: transparent; }
 

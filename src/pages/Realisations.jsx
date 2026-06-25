@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { projets } from '../data/projets'
 import { competences } from '../data/competences'
 import ProjectCard from '../components/ProjectCard'
@@ -6,6 +7,24 @@ import Reveal from '../components/Reveal'
 
 export default function Realisations() {
   const [filtre, setFiltre] = useState('all')
+  const { hash } = useLocation()
+
+  // Arrivée via un lien profond (#ratp…) : on défile jusqu'au projet ciblé,
+  // une fois la transition de page terminée.
+  useEffect(() => {
+    if (!hash) return
+    const id = decodeURIComponent(hash.slice(1))
+    setFiltre('all')
+    const t = setTimeout(() => {
+      const el = document.getElementById(id)
+      if (!el) return
+      if (window.__lenis) window.__lenis.scrollTo(el, { offset: -110 })
+      else el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      el.classList.add('is-target')
+      setTimeout(() => el.classList.remove('is-target'), 2600)
+    }, 450)
+    return () => clearTimeout(t)
+  }, [hash])
 
   const filtres = [
     { id: 'all', label: 'Tous', color: '#38bdf8' },

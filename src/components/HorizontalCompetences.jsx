@@ -22,7 +22,7 @@ function Panel({ c }) {
           </span>
           <Icon size={64} className="text-white" strokeWidth={1.4} />
           <span className="absolute left-8 top-8 text-sm font-semibold uppercase tracking-widest text-white/80">
-            Niveau Confirmé
+            {c.verbe}
           </span>
         </div>
 
@@ -37,12 +37,12 @@ function Panel({ c }) {
           <p className="mt-4 max-w-xl text-lg text-muted">{c.tagline}</p>
 
           <ul className="mt-6 grid max-w-xl gap-2.5">
-            {c.apprentissagesCritiques.map((ac, i) => (
-              <li key={ac.code} className="flex gap-3 text-[15px] text-ink-soft">
+            {c.savoirFaire.slice(0, 4).map((s, i) => (
+              <li key={s} className="flex gap-3 text-[15px] text-ink-soft">
                 <span className="font-mono text-sm font-semibold" style={{ color: c.color }}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <span>{ac.texte}</span>
+                <span>{s}</span>
               </li>
             ))}
           </ul>

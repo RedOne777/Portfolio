@@ -9,7 +9,6 @@ import ScrollProgress from './components/ScrollProgress'
 import GlobalBackground from './components/GlobalBackground'
 import Home from './pages/Home'
 import Profil from './pages/Profil'
-import Demarche from './pages/Demarche'
 import Competences from './pages/Competences'
 import CompetenceDetail from './pages/CompetenceDetail'
 import Realisations from './pages/Realisations'
@@ -62,7 +61,6 @@ export default function App() {
             <Routes location={location}>
               <Route path="/" element={<Home />} />
               <Route path="/profil" element={<Profil />} />
-              <Route path="/demarche" element={<Demarche />} />
               <Route path="/competences" element={<Competences />} />
               <Route path="/competences/:slug" element={<CompetenceDetail />} />
               <Route path="/realisations" element={<Realisations />} />

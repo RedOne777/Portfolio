@@ -40,8 +40,8 @@ export default function Realisations() {
         <span className="chip">Traces & preuves</span>
         <h1 className="mt-5 font-display text-4xl font-bold text-ink sm:text-5xl">Réalisations</h1>
         <p className="mt-5 text-lg leading-relaxed text-muted">
-          Les projets universitaires et expériences professionnelles qui alimentent l'analyse
-          réflexive de mes compétences. Filtrez par type pour parcourir les traces associées.
+          Les projets et expériences professionnelles qui illustrent mes compétences au quotidien.
+          Filtrez par type pour explorer chaque réalisation.
         </p>
       </section>
 

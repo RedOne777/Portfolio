@@ -22,7 +22,7 @@ const KEYWORDS = [
 // Étiquettes "tokens" flottantes (façon design system) — côté droit du hero
 const PILLS = [
   { label: 'role = "apprenti.data"', color: '#2563eb', cls: 'right-[8%] top-[15%]', d: 6 },
-  { label: 'skill.data = "confirmé"', color: '#0ea5e9', cls: 'right-[16%] top-[33%]', d: 7.5 },
+  { label: 'skill.data = "avancé"', color: '#0ea5e9', cls: 'right-[16%] top-[33%]', d: 7.5 },
   { weather: true, color: '#7c3aed', cls: 'right-[5%] top-[46%]', d: 6.2 },
   { label: 'stack = [sql, python, neo4j]', color: '#2563eb', cls: 'right-[13%] top-[62%]', d: 6.8 },
   { label: 'org = "ratp.infra"', color: '#059669', cls: 'right-[22%] top-[78%]', d: 8 },
@@ -97,7 +97,7 @@ export default function Home() {
               transition={{ duration: 0.7 }}
               className="font-mono text-xs uppercase tracking-[0.22em] text-muted"
             >
-              Portfolio de fin d'études · 2023—2026
+              Portfolio · Données & systèmes d'information
             </motion.p>
 
             <h1 className="mt-5 font-semibold leading-[0.92] tracking-[-0.035em] text-ink">
@@ -142,8 +142,8 @@ export default function Home() {
                 </Link>
               </Magnetic>
               <Magnetic strength={0.2}>
-                <Link to="/demarche" className="link-arrow text-[17px]">
-                  Comment lire ce site <ChevronRight size={16} />
+                <Link to="/realisations" className="link-arrow text-[17px]">
+                  Voir mes réalisations <ChevronRight size={16} />
                 </Link>
               </Magnetic>
             </motion.div>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { projets } from '../data/projets'
-import { competences } from '../data/competences'
 import ProjectCard from '../components/ProjectCard'
 import Reveal from '../components/Reveal'
 
@@ -28,11 +27,12 @@ export default function Realisations() {
 
   const filtres = [
     { id: 'all', label: 'Tous', color: '#38bdf8' },
-    ...competences.map((c) => ({ id: c.id, label: c.verbe, color: c.color, titre: c.titre })),
+    { id: 'uni', label: 'Projets universitaires', color: '#2563eb' },
+    { id: 'pro', label: 'Expériences professionnelles', color: '#059669' },
   ]
 
   const liste =
-    filtre === 'all' ? projets : projets.filter((p) => p.competences.includes(filtre))
+    filtre === 'all' ? projets : projets.filter((p) => p.type === filtre)
 
   return (
     <div className="container-px pt-32 pb-10">
@@ -40,8 +40,8 @@ export default function Realisations() {
         <span className="chip">Traces & preuves</span>
         <h1 className="mt-5 font-display text-4xl font-bold text-ink sm:text-5xl">Réalisations</h1>
         <p className="mt-5 text-lg leading-relaxed text-muted">
-          Les projets universitaires et missions professionnelles qui alimentent l'analyse réflexive
-          de mes compétences. Filtrez par compétence pour voir les traces associées.
+          Les projets universitaires et expériences professionnelles qui alimentent l'analyse
+          réflexive de mes compétences. Filtrez par type pour parcourir les traces associées.
         </p>
       </section>
 
@@ -54,7 +54,7 @@ export default function Realisations() {
               key={f.id}
               type="button"
               onClick={() => setFiltre(f.id)}
-              title={f.titre || 'Tous les projets'}
+              title={f.label}
               className={`rounded-full border px-4 py-2 text-sm font-medium transition-all ${
                 active ? 'text-white' : 'text-muted hover:text-ink'
               }`}

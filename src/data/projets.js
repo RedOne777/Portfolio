@@ -9,6 +9,7 @@ const GITHUB = "https://github.com/RedOne777";
 export const projets = [
   {
     id: "aerowise",
+    type: "uni",
     titre: "AeroWise",
     sousTitre: "Gestion de la biodiversité aéroportuaire",
     categorie: "Projet universitaire",
@@ -27,6 +28,7 @@ export const projets = [
   },
   {
     id: "ratp",
+    type: "pro",
     titre: "Modernisation d'un système d'archivage",
     sousTitre: "RATP Infrastructure",
     categorie: "Alternance / Stage",
@@ -48,6 +50,7 @@ export const projets = [
   },
   {
     id: "demographie",
+    type: "uni",
     titre: "Analyse démographique de la France (2019)",
     sousTitre: "Informatique décisionnelle",
     categorie: "Projet universitaire",
@@ -65,6 +68,7 @@ export const projets = [
   },
   {
     id: "meteovision",
+    type: "uni",
     titre: "MétéoVision",
     sousTitre: "Tableau de bord météorologique",
     categorie: "Projet universitaire",
@@ -81,6 +85,7 @@ export const projets = [
   },
   {
     id: "crypto",
+    type: "uni",
     titre: "Cryptographie & sécurité des données",
     sousTitre: "AES et codes correcteurs",
     categorie: "Projet universitaire",
@@ -97,6 +102,7 @@ export const projets = [
   },
   {
     id: "reseau",
+    type: "uni",
     titre: "Maquette réseau multi-routeurs",
     sousTitre: "Administration & réseaux",
     categorie: "Projet universitaire",

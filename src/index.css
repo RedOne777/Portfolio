@@ -220,6 +220,17 @@
   to { transform: translateY(120vh); }
 }
 
+/* Mise en évidence d'un projet ciblé par un lien profond (#ratp…) */
+@keyframes anchor-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+  35% { box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.32); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+.project-card.is-target {
+  border-color: var(--color-brand);
+  animation: anchor-pulse 1.8s ease-in-out 1;
+}
+
 /* Typographie contour */
 .text-stroke { -webkit-text-stroke: 1.5px currentColor; color: transparent; }
 

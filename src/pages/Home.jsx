@@ -205,8 +205,8 @@ export default function Home() {
             <Reveal delay={0.3}>
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <Magnetic>
-                  <Link to="/realisations" className="btn btn-tesla bg-white text-black hover:bg-white/90">
-                    Voir les réalisations
+                  <Link to="/realisations#ratp" className="btn btn-tesla bg-white text-black hover:bg-white/90">
+                    Voir la mission RATP
                   </Link>
                 </Magnetic>
                 <Magnetic>

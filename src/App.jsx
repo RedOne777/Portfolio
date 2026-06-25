@@ -25,6 +25,7 @@ export default function App() {
   useEffect(() => {
     const lenis = new Lenis({ duration: 1.05, smoothWheel: true, anchors: { offset: -100 } })
     lenisRef.current = lenis
+    window.__lenis = lenis
     let raf
     const loop = (t) => { lenis.raf(t); raf = requestAnimationFrame(loop) }
     raf = requestAnimationFrame(loop)
@@ -32,6 +33,7 @@ export default function App() {
       cancelAnimationFrame(raf)
       lenis.destroy()
       lenisRef.current = null
+      window.__lenis = null
     }
   }, [])
 

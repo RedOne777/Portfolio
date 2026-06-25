@@ -68,14 +68,18 @@ def build():
     pdf.set_fill_color(*NAVY)
     pdf.rect(0, 0, 210, 76, "F")
 
-    # Badge initiales
-    pdf.set_draw_color(*CYAN)
-    pdf.set_line_width(0.6)
-    pdf.rect(18, 20, 18, 18, "D")
-    pdf.set_font(FONT, "B", 16)
-    pdf.set_text_color(*CYAN)
-    pdf.set_xy(18, 25.5)
-    pdf.cell(18, 7, "R", align="C")
+    # Badge logo (R-aile)
+    logo_path = os.path.join(os.path.dirname(__file__), "assets", "logo-r-aile.png")
+    if os.path.exists(logo_path):
+        pdf.image(logo_path, x=18, y=20, w=18, h=18)
+    else:
+        pdf.set_draw_color(*CYAN)
+        pdf.set_line_width(0.6)
+        pdf.rect(18, 20, 18, 18, "D")
+        pdf.set_font(FONT, "B", 16)
+        pdf.set_text_color(*CYAN)
+        pdf.set_xy(18, 25.5)
+        pdf.cell(18, 7, "R", align="C")
 
     # Nom + titres
     pdf.set_xy(42, 19)

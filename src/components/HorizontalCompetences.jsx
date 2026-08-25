@@ -47,7 +47,7 @@ function Panel({ c }) {
             ))}
           </ul>
 
-          <Link to={`/competences/${c.slug}`} className="btn mt-8 text-white" style={{ background: c.color }}>
+          <Link to={`/competences/${c.slug}`} data-cursor="Explorer" className="btn mt-8 text-white" style={{ background: c.color }}>
             Explorer la compétence <ArrowRight size={17} />
           </Link>
         </div>

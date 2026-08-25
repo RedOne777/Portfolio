@@ -18,8 +18,8 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-4 max-w-sm text-[13px] leading-relaxed text-muted">
-              Portfolio de fin d'études en informatique. La démonstration, preuves à l'appui, du
-              plus haut niveau de mes trois compétences.
+              Données, systèmes d'information et aide à la décision. Mes compétences et mes
+              projets, preuves à l'appui.
             </p>
           </div>
 
@@ -59,7 +59,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 border-t border-line pt-6 text-[12px] text-muted">
-          © {year} {profil.nomComplet}. Portfolio de fin d'études — IUT de Créteil-Vitry.
+          © {year} {profil.nomComplet} · Portfolio personnel — conçu et développé par mes soins.
         </div>
       </div>
     </footer>

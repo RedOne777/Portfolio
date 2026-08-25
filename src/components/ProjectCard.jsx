@@ -60,11 +60,11 @@ export default function ProjectCard({ projet: p }) {
           >
             <Github size={15} /> Code <ArrowUpRight size={14} />
           </a>
-        ) : (
+        ) : p.confidentiel ? (
           <span className="inline-flex items-center gap-1 pt-4 text-[13px] text-muted">
             <Lock size={13} /> Confidentiel
           </span>
-        )}
+        ) : null}
       </div>
     </article>
   )

@@ -12,6 +12,7 @@ import Profil from './pages/Profil'
 import Competences from './pages/Competences'
 import CompetenceDetail from './pages/CompetenceDetail'
 import Realisations from './pages/Realisations'
+import Aerowise from './pages/Aerowise'
 import Parcours from './pages/Parcours'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
@@ -64,6 +65,7 @@ export default function App() {
               <Route path="/competences" element={<Competences />} />
               <Route path="/competences/:slug" element={<CompetenceDetail />} />
               <Route path="/realisations" element={<Realisations />} />
+              <Route path="/realisations/aerowise" element={<Aerowise />} />
               <Route path="/parcours" element={<Parcours />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />

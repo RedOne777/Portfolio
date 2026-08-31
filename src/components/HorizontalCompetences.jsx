@@ -35,9 +35,12 @@ function Panel({ c }) {
             {c.titre}
           </h3>
           <p className="mt-4 max-w-xl text-lg text-muted">{c.tagline}</p>
+          <p className="mt-3 max-w-xl text-sm font-medium" style={{ color: c.color }}>
+            Niveau {c.niveauNum} · {c.niveauTitre}
+          </p>
 
           <ul className="mt-6 grid max-w-xl gap-2.5">
-            {c.savoirFaire.slice(0, 4).map((s, i) => (
+            {c.apprentissages.slice(0, 4).map((s, i) => (
               <li key={s} className="flex gap-3 text-[15px] text-ink-soft">
                 <span className="font-mono text-sm font-semibold" style={{ color: c.color }}>
                   {String(i + 1).padStart(2, '0')}
@@ -75,7 +78,7 @@ export default function HorizontalCompetences() {
           {/* En-tête fixe */}
           <div className="container-wide absolute left-1/2 top-16 z-10 -translate-x-1/2">
             <div className="flex items-end justify-between">
-              <p className="eyebrow">Les 3 compétences · défilez →</p>
+              <p className="eyebrow">Compétences de niveau 3 · défilez →</p>
               <p className="font-mono text-sm text-muted">
                 0{active + 1} / 0{n}
               </p>

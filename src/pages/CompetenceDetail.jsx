@@ -10,7 +10,7 @@ import SectionNav from '../components/SectionNav'
 
 const SECTIONS = [
   { id: 'apercu', label: 'Aperçu' },
-  { id: 'savoir-faire', label: 'Savoir-faire' },
+  { id: 'apprentissages', label: 'Apprentissages' },
   { id: 'projets', label: 'Projets' },
   { id: 'bilan', label: 'Bilan' },
 ]
@@ -55,7 +55,7 @@ export default function CompetenceDetail() {
             <Icon size={26} />
           </span>
           <div>
-            <p className="eyebrow" style={{ color: c.color }}>Compétence clé</p>
+            <p className="eyebrow" style={{ color: c.color }}>Compétence {c.code.replace('C', '')} · Niveau {c.niveauNum}</p>
             <h1 className="mt-1 text-3xl font-semibold text-ink sm:text-[2.6rem]">{c.titre}</h1>
           </div>
         </div>
@@ -68,8 +68,11 @@ export default function CompetenceDetail() {
       <section className="mt-10 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
         <Reveal>
           <div className="card h-full p-6">
-            <h2 className="font-display text-base font-semibold text-ink">En quoi ça consiste</h2>
-            <p className="mt-1 text-sm font-medium" style={{ color: c.color }}>{c.resume}</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
+              Référentiel BUT · parcours C — {c.titreOfficiel}
+            </p>
+            <h2 className="mt-2 font-display text-base font-semibold text-ink">Objectif de niveau {c.niveauNum}</h2>
+            <p className="mt-1 text-[15px] font-medium" style={{ color: c.color }}>« {c.niveauTitre} »</p>
             <p className="mt-4 text-muted">{c.definition}</p>
           </div>
         </Reveal>
@@ -88,20 +91,41 @@ export default function CompetenceDetail() {
         </Reveal>
       </section>
 
-      {/* Savoir-faire */}
-      <section id="savoir-faire" className="mt-16">
-        <h2 className="font-display text-2xl font-bold text-ink">Ce que je sais faire</h2>
-        <p className="mt-2 text-muted">Les savoir-faire concrets que je mobilise sur cette compétence.</p>
+      {/* Apprentissages critiques + composantes essentielles */}
+      <section id="apprentissages" className="mt-16">
+        <h2 className="font-display text-2xl font-bold text-ink">Apprentissages critiques</h2>
+        <p className="mt-2 max-w-3xl text-muted">
+          Les savoir-faire visés au niveau {c.niveauNum} par le référentiel (parcours C) —
+          ce que je dois démontrer, preuves à l'appui.
+        </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {c.savoirFaire.map((s, i) => (
+          {c.apprentissages.map((s, i) => (
             <Reveal key={s} delay={i * 0.05}>
               <div className="card flex items-start gap-3 p-5">
-                <CheckCircle2 size={18} className="mt-0.5 shrink-0" style={{ color: c.color }} />
+                <span className="mt-0.5 font-mono text-sm font-semibold" style={{ color: c.color }}>
+                  AC{i + 1}
+                </span>
                 <p className="text-sm text-ink-soft">{s}</p>
               </div>
             </Reveal>
           ))}
         </div>
+
+        {/* Composantes essentielles */}
+        <Reveal>
+          <div className="card-soft mt-4 p-6">
+            <h3 className="text-sm font-semibold text-ink">Composantes essentielles</h3>
+            <p className="mt-1 text-sm text-muted">Le cadre dans lequel la compétence s'exerce.</p>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              {c.composantes.map((ce) => (
+                <li key={ce} className="flex gap-2 text-sm text-ink-soft">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full" style={{ background: c.color }} />
+                  {ce}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </section>
 
       {/* Projets & réalisations */}
@@ -137,17 +161,23 @@ export default function CompetenceDetail() {
                 {/* preuves */}
                 {t.preuves?.length > 0 && (
                   <div className="mt-5 flex flex-wrap gap-3 border-t border-line pt-4">
-                    {t.preuves.map((pr) =>
-                      pr.url ? (
+                    {t.preuves.map((pr) => {
+                      if (!pr.url)
+                        return (
+                          <span key={pr.label} className="inline-flex items-center gap-1.5 text-sm text-muted">
+                            <Lock size={14} /> {pr.label}
+                          </span>
+                        )
+                      return pr.url.startsWith('/') ? (
+                        <Link key={pr.label} to={pr.url} className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-ink" style={{ color: c.color }}>
+                          {pr.label} <ArrowRight size={14} />
+                        </Link>
+                      ) : (
                         <a key={pr.label} href={pr.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-ink" style={{ color: c.color }}>
                           {pr.label} <ArrowUpRight size={14} />
                         </a>
-                      ) : (
-                        <span key={pr.label} className="inline-flex items-center gap-1.5 text-sm text-muted">
-                          <Lock size={14} /> {pr.label}
-                        </span>
                       )
-                    )}
+                    })}
                   </div>
                 )}
               </article>

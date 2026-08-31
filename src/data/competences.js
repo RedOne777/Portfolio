@@ -1,14 +1,15 @@
 // ---------------------------------------------------------------------------
-// COMPÉTENCES CLÉS — présentation professionnelle.
-// Pour chacune : ce qu'elle recouvre, les savoir-faire concrets, et les
-// projets/expériences qui le prouvent (avec une courte analyse).
+// COMPÉTENCES — BUT Informatique, parcours C « Administration, gestion et
+// exploitation des données ». Libellés, niveaux et apprentissages critiques
+// repris du référentiel national (V31AC). En 3ᵉ année, trois compétences
+// atteignent le niveau 3 : Gérer les données, Conduire un projet, Collaborer.
 // ---------------------------------------------------------------------------
 
 const GITHUB = "https://github.com/RedOne777";
 
 export const competences = [
   // =========================================================================
-  // GÉRER LES DONNÉES
+  // C4 — GÉRER DES DONNÉES DE L'INFORMATION
   // =========================================================================
   {
     id: "c4",
@@ -18,9 +19,11 @@ export const competences = [
     colorClass: "c4",
     verbe: "Gérer",
     titre: "Gérer les données",
+    titreOfficiel: "Gérer des données de l'information",
+    niveauNum: 3,
     niveau: "Avancé",
-    resume:
-      "De la modélisation à la décision : administrer, fiabiliser et exploiter des données hétérogènes.",
+    niveauTitre:
+      "Administrer une base de données, concevoir et réaliser des systèmes d'informations décisionnels",
     tagline:
       "De la donnée à la décision : capturer, fiabiliser, exploiter et valoriser des données hétérogènes.",
     definition:
@@ -30,25 +33,32 @@ export const competences = [
       "Sécuriser et fiabiliser des données",
       "Exploiter des données pour la prise de décision",
     ],
-    savoirFaire: [
-      "Modéliser et administrer des bases relationnelles et nouvelle génération (spatial, graphe, vectoriel)",
-      "Préparer, fiabiliser et intégrer des données hétérogènes",
-      "Construire des systèmes décisionnels : entrepôts, modèles en étoile, tableaux de bord",
-      "Interroger et optimiser des bases en production",
-      "Garantir la sécurité et la qualité des données (confidentialité, intégrité, RGPD)",
+    // Apprentissages critiques — niveau 3, parcours C (référentiel)
+    apprentissages: [
+      "Capturer et stocker des ensembles volumineux et complexes de données hétérogènes",
+      "Préparer et extraire les données pour l'exploitation",
+      "Appliquer des méthodes d'exploration et d'exploitation des données (apprentissage, informatique décisionnelle, fouille de données)",
+      "Mettre en production et optimiser le système de gestion de données de l'entreprise",
+    ],
+    // Composantes essentielles — le cadre dans lequel la compétence s'exerce
+    composantes: [
+      "Réglementation vie privée & protection des données (RGPD)",
+      "Enjeux économiques, sociétaux et écologiques du stockage (data centers, cloud)",
+      "En s'appuyant sur des bases mathématiques",
+      "En assurant la cohérence et la qualité des données",
     ],
     traces: [
       {
-        titre: "AeroWise — Assistant intelligent sur données hétérogènes",
-        contexte: "Projet universitaire — Gestion de la biodiversité aéroportuaire",
+        titre: "AeroWise — Chaîne de données complète & base unique consolidée",
+        contexte: "SAÉ Datamining (3ᵉ année) — Analyse du risque animalier aéroportuaire",
         type: "Projet universitaire",
-        stack: ["PostGIS", "Neo4j", "Qdrant", "Python", "RAG"],
+        stack: ["PostgreSQL 16", "PostGIS", "pgvector", "Python ETL", "FastAPI"],
         analyse:
-          "Ma réalisation la plus aboutie côté données : j'ai stocké des données complexes et hétérogènes en combinant trois moteurs complémentaires — spatial avec PostGIS (zones aéroportuaires), graphe avec Neo4j (relations espèces / incidents) et vectoriel avec Qdrant (recherche sémantique). Le choix de chaque moteur découle de la nature de la donnée et du type de requête : une persistance polyglotte assumée. Le chatbot repose sur une approche RAG : préparation et vectorisation des contenus, puis recherche par similarité. La principale difficulté a été la cohérence entre les trois bases ; j'y répondrais aujourd'hui par une couche d'ingestion unifiée et un suivi de la fraîcheur des données.",
-        preuves: [{ label: "Dépôt GitHub", url: GITHUB }],
+          "Ma réalisation la plus aboutie côté données. Une première version reposait sur trois bases (PostgreSQL, Neo4j, Qdrant) et un RAG documentaire ; l'analyse critique m'a conduit à une refonte assumée vers une base unique — PostgreSQL équipé de PostGIS (géométries) et pgvector (recherche sémantique) — qui autorise des jointures directes impossibles proprement avec trois bases séparées. Le pipeline capture et stocke des données hétérogènes et volumineuses (observations GBIF, référentiels TAXREF / AVONET) via 11 scripts idempotents, puis les prépare pour l'exploitation décisionnelle (carte de chaleur, tableau de bord, score de risque). Le choix structurant : matérialiser les distances observation × aéroport (ST_DWithin / ST_Distance) pour que le « rayon d'analyse » ne soit plus qu'un filtre indexé. Un rôle en lecture seule et des garde-fous SQL sécurisent l'accès de l'agent IA. Piste : calibrer le score de risque sur la base FAA (corrélation de Spearman).",
+        preuves: [{ label: "Étude de cas complète", url: "/realisations/aerowise" }],
       },
       {
-        titre: "Analyse démographique de la France (2019) — Tableau de bord décisionnel",
+        titre: "Analyse démographique de la France (2019) — Système décisionnel",
         contexte: "Projet universitaire — Informatique décisionnelle",
         type: "Projet universitaire",
         stack: ["Power BI", "DAX", "Modèle en étoile", "Web"],
@@ -65,15 +75,6 @@ export const competences = [
         analyse:
           "En entreprise, j'ai interrogé une base PostgreSQL de production (via MobaXterm) et modélisé des données de signalisation ferroviaire — un jeu de données complexe et critique. Découvrir l'architecture entre l'ORM et la base m'a fait toucher ce qui sépare une base d'école d'un système en production : volume, criticité, habilitations, plans d'exécution. La sensibilité des données impose le respect strict des accès et des réglementations. La principale tension : interroger la production sans dégrader le service, ce qui m'a imposé prudence, requêtes en lecture seule et fenêtres adaptées.",
         preuves: [{ label: "Démonstration sur demande (données internes RATP)", url: null }],
-      },
-      {
-        titre: "MétéoVision — Restitution de données dynamiques",
-        contexte: "Projet universitaire — Tableau de bord météorologique",
-        type: "Projet universitaire",
-        stack: ["Web", "Base de données", "Auth", "Data-viz"],
-        analyse:
-          "Ce site exploite des données dynamiques restituées via des graphiques interactifs et une carte thermique. La gestion de l'authentification et de la base complète la dimension administration, et la cohérence des données affichées reste un point de vigilance. Piste : mise en cache et indicateur de fraîcheur de la donnée.",
-        preuves: [{ label: "Dépôt GitHub", url: GITHUB }],
       },
       {
         titre: "Cryptographie & sécurité des données — AES et codes correcteurs",
@@ -95,7 +96,7 @@ export const competences = [
   },
 
   // =========================================================================
-  // CONDUIRE UN PROJET
+  // C5 — CONDUIRE UN PROJET
   // =========================================================================
   {
     id: "c5",
@@ -105,9 +106,11 @@ export const competences = [
     colorClass: "c5",
     verbe: "Conduire",
     titre: "Conduire un projet",
+    titreOfficiel: "Conduire un projet",
+    niveauNum: 3,
     niveau: "Avancé",
-    resume:
-      "Concevoir, intégrer et faire évoluer un système d'information au service du métier.",
+    niveauTitre:
+      "Participer à la conception et à la mise en œuvre d'un projet système d'information",
     tagline:
       "Faire entrer un projet dans la réalité d'un système d'information : intégrer, adapter, mesurer les impacts.",
     definition:
@@ -117,12 +120,16 @@ export const competences = [
       "Maintenir un système en condition opérationnelle",
       "Faire évoluer un système d'information",
     ],
-    savoirFaire: [
-      "Recueillir les besoins et rédiger des spécifications fonctionnelles",
-      "Concevoir une architecture applicative et des maquettes UI/UX",
-      "Intégrer un projet dans un système d'information existant",
-      "Faire évoluer un système : modernisation, reprise de l'existant",
-      "Mesurer les impacts d'un projet (dette technique, continuité de service)",
+    apprentissages: [
+      "Mesurer les impacts économiques, sociétaux et technologiques d'un projet informatique",
+      "Intégrer un projet informatique dans le système d'information d'une organisation",
+      "Adapter un système d'information",
+    ],
+    composantes: [
+      "En communiquant efficacement avec les acteurs du projet",
+      "En respectant les règles juridiques et les normes en vigueur",
+      "En sensibilisant à une gestion éthique, responsable et durable",
+      "En adoptant une démarche proactive, créative et critique",
     ],
     traces: [
       {
@@ -136,13 +143,13 @@ export const competences = [
         preuves: [{ label: "Démonstration sur demande (données internes RATP)", url: null }],
       },
       {
-        titre: "AeroWise — Conception et mise en œuvre d'un SI de suivi des incidents",
-        contexte: "Projet universitaire — Biodiversité aéroportuaire",
+        titre: "AeroWise — Conduite d'un projet SI de bout en bout",
+        contexte: "SAÉ Datamining (3ᵉ année) — Biodiversité aéroportuaire",
         type: "Projet universitaire",
-        stack: ["React", "Dashboard", "Cartographie", "Multi-bases"],
+        stack: ["React", "FastAPI", "Docker", "Multi-sources"],
         analyse:
-          "Mené comme un projet SI complet : recueil des besoins, conception de l'architecture, puis réalisation d'une application React avec carte interactive et tableau de bord de suivi des incidents — de la donnée à l'interface de pilotage. Le sujet, la biodiversité aéroportuaire, porte une forte dimension environnementale, et le travail d'équipe a exigé une communication continue avec les parties prenantes. Le choix d'un assistant intelligent témoigne d'une démarche créative.",
-        preuves: [{ label: "Dépôt GitHub", url: GITHUB }],
+          "Mené comme un projet SI complet : recueil des besoins, conception de l'architecture, puis réalisation d'une application (carte, tableau de bord, agent IA) — de la donnée à l'interface de pilotage. J'y ai mesuré des impacts concrets : réduction de l'infrastructure (d'une architecture 3 bases vers une seule), portabilité du fournisseur d'IA, et déploiement en une commande via Docker. Le sujet, le risque animalier, porte une dimension sécurité et environnementale forte, et le travail d'équipe a exigé une communication continue.",
+        preuves: [{ label: "Étude de cas complète", url: "/realisations/aerowise" }],
       },
       {
         titre: "Projet data mining — De la donnée brute à l'aide à la décision",
@@ -164,7 +171,7 @@ export const competences = [
   },
 
   // =========================================================================
-  // COLLABORER EN ÉQUIPE
+  // C6 — COLLABORER AU SEIN D'UNE ÉQUIPE INFORMATIQUE
   // =========================================================================
   {
     id: "c6",
@@ -174,9 +181,10 @@ export const competences = [
     colorClass: "c6",
     verbe: "Collaborer",
     titre: "Collaborer en équipe",
+    titreOfficiel: "Collaborer au sein d'une équipe informatique",
+    niveauNum: 3,
     niveau: "Avancé",
-    resume:
-      "Faire équipe et accompagner le changement au sein d'une organisation.",
+    niveauTitre: "Manager une équipe informatique",
     tagline:
       "Faire équipe et faire évoluer : veille, conduite du changement et communication au service du collectif.",
     definition:
@@ -186,12 +194,17 @@ export const competences = [
       "Organiser son travail avec celui de l'équipe",
       "Élaborer, gérer et transmettre de l'information",
     ],
-    savoirFaire: [
-      "Travailler en équipe pluridisciplinaire (métier, IT, encadrement)",
-      "Organiser le travail collectif avec Git et un suivi d'avancement",
-      "Accompagner la conduite du changement auprès des utilisateurs",
-      "Mener une veille technologique et la réinvestir dans les projets",
-      "Communiquer avec des interlocuteurs non techniques",
+    apprentissages: [
+      "Organiser et partager une veille numérique",
+      "Identifier les enjeux de l'économie de l'innovation numérique",
+      "Guider la conduite du changement informatique au sein d'une organisation",
+      "Accompagner le management de projet informatique",
+    ],
+    composantes: [
+      "Au sein d'une équipe pluridisciplinaire",
+      "En accompagnant la mise en œuvre des évolutions informatiques",
+      "En veillant au respect des contraintes juridiques",
+      "En développant une communication efficace et collaborative",
     ],
     traces: [
       {
@@ -210,16 +223,16 @@ export const competences = [
         type: "Projet universitaire",
         stack: ["Git", "Gestion de projet", "Communication"],
         analyse:
-          "Sur mes projets, j'ai organisé le travail collectif : répartition des rôles, utilisation de Git (branches, intégration), suivi de l'avancement et communication régulière. La pluridisciplinarité des sujets (données, cartographie, IA, interface) m'a appris à articuler des expertises différentes au sein d'une même équipe. Piste : standardiser nos rituels (revues de code, rétrospectives).",
+          "Sur mes projets, j'ai organisé le travail collectif : répartition des rôles, utilisation de Git (branches, intégration), suivi de l'avancement et communication régulière. Sur AeroWise, à trois, la découpe en phases démontrables (données, API, carte, agent) a structuré la collaboration. La pluridisciplinarité des sujets m'a appris à articuler des expertises différentes. Piste : standardiser nos rituels (revues de code, rétrospectives).",
         preuves: [{ label: "Dépôt GitHub", url: GITHUB }],
       },
       {
-        titre: "Veille technologique — Bases de données nouvelle génération & IA",
+        titre: "Veille technologique — Bases nouvelle génération & IA",
         contexte: "Démarche personnelle",
         type: "Veille",
-        stack: ["Vector DB", "Graphes", "RAG / LLM"],
+        stack: ["Spatial / Vectoriel", "RAG / LLM", "Agents à outils"],
         analyse:
-          "J'organise une veille sur les bases de données nouvelle génération (vectoriel avec Qdrant, graphe avec Neo4j) et l'IA générative, que je réinvestis directement dans mes projets — AeroWise en est la preuve. Cette veille nourrit ma compréhension des enjeux de la donnée : valeur, souveraineté, coûts d'infrastructure. Piste : formaliser ce partage (synthèses régulières à l'équipe).",
+          "J'organise une veille sur les bases de données nouvelle génération (spatial, vectoriel) et l'IA générative, que je réinvestis directement dans mes projets — la refonte d'AeroWise vers PostGIS + pgvector et son agent à outils en sont la preuve. Cette veille nourrit ma compréhension des enjeux de la donnée : valeur, souveraineté, coûts d'infrastructure. Piste : formaliser ce partage (synthèses régulières à l'équipe).",
         preuves: [{ label: "Profil GitHub & projets", url: GITHUB }],
       },
       {
@@ -246,39 +259,39 @@ export const competences = [
 export const competenceBySlug = (slug) => competences.find((c) => c.slug === slug);
 
 // ---------------------------------------------------------------------------
-// VUE D'ENSEMBLE — l'ensemble des compétences, en langage simple.
-// niveauNum : 1 = Notions, 2 = Intermédiaire, 3 = Avancé.
-// Les 3 compétences "focus" ont une page détaillée.
+// VUE D'ENSEMBLE — les 6 compétences du référentiel (parcours C).
+// niveauNum : 2 = niveau atteint en fin de 2ᵉ année, 3 = niveau atteint en 3ᵉ.
+// En parcours C, C4/C5/C6 sont poussées au niveau 3 (« cœur d'expertise »).
 // ---------------------------------------------------------------------------
 export const toutesLesCompetences = [
   {
     code: "C1",
-    titre: "Réaliser une application",
-    plain: "Concevoir et programmer une application qui répond à un besoin précis.",
+    titre: "Réaliser un développement d'application",
+    plain: "Niveau 2 — partir des exigences et aller jusqu'à une application complète.",
     niveau: "Intermédiaire",
     niveauNum: 2,
     color: "#94a3b8",
   },
   {
     code: "C2",
-    titre: "Optimiser une application",
-    plain: "Rendre un programme plus rapide, plus fiable et moins gourmand en ressources.",
+    titre: "Optimiser des applications",
+    plain: "Niveau 2 — sélectionner les algorithmes adéquats pour un problème donné.",
     niveau: "Intermédiaire",
     niveauNum: 2,
     color: "#94a3b8",
   },
   {
     code: "C3",
-    titre: "Administrer systèmes & réseaux",
-    plain: "Installer, sécuriser et maintenir des serveurs et des réseaux informatiques.",
+    titre: "Administrer des systèmes communicants",
+    plain: "Niveau 2 — déployer des services dans une architecture réseau.",
     niveau: "Intermédiaire",
     niveauNum: 2,
     color: "#94a3b8",
   },
   {
     code: "C4",
-    titre: "Gérer les données",
-    plain: "Modéliser, fiabiliser et exploiter les données pour aider à la décision.",
+    titre: "Gérer des données de l'information",
+    plain: "Niveau 3 — administrer une base et concevoir des systèmes décisionnels.",
     niveau: "Avancé",
     niveauNum: 3,
     color: "#2f6f9f",
@@ -288,7 +301,7 @@ export const toutesLesCompetences = [
   {
     code: "C5",
     titre: "Conduire un projet",
-    plain: "Organiser un projet informatique et l'intégrer dans une entreprise.",
+    plain: "Niveau 3 — concevoir et mettre en œuvre un projet système d'information.",
     niveau: "Avancé",
     niveauNum: 3,
     color: "#6b5aa0",
@@ -297,8 +310,8 @@ export const toutesLesCompetences = [
   },
   {
     code: "C6",
-    titre: "Collaborer en équipe",
-    plain: "Travailler en équipe, communiquer et accompagner le changement.",
+    titre: "Collaborer dans une équipe",
+    plain: "Niveau 3 — manager une équipe informatique.",
     niveau: "Avancé",
     niveauNum: 3,
     color: "#2e8b6b",

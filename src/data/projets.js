@@ -9,24 +9,28 @@ const GITHUB = "https://github.com/RedOne777";
 export const projets = [
   {
     id: "aerowise",
+    type: "uni",
     titre: "AeroWise",
-    sousTitre: "Gestion de la biodiversité aéroportuaire",
-    categorie: "Projet universitaire",
-    periode: "3ᵉ année",
+    sousTitre: "Analyse du risque animalier autour des aéroports",
+    categorie: "SAÉ Datamining · 3ᵉ année",
+    periode: "2026",
     vedette: true,
     description:
-      "Plateforme de suivi de la biodiversité sur les emprises aéroportuaires, couplée à un assistant intelligent capable d'interroger des données hétérogènes.",
+      "Application web d'aide à l'analyse du risque aviaire : elle croise des observations naturalistes réelles (GBIF) avec un score de dangerosité par espèce — carte de chaleur, tableau de bord et agent IA interrogeant la base en langage naturel.",
     points: [
-      "Application React avec carte interactive et tableau de bord de suivi des incidents",
-      "Chatbot intelligent (RAG) s'appuyant sur PostGIS, Neo4j et Qdrant",
-      "Architecture de persistance polyglotte (spatial, graphe, vectoriel)",
+      "Chaîne de données complète : extraction citable (GBIF/TAXREF/AVONET), 11 scripts Python idempotents",
+      "Refonte assumée : d'une architecture 3 bases (PostgreSQL/Neo4j/Qdrant) vers un PostgreSQL unique (PostGIS + pgvector)",
+      "Agent IA à outils interrogeant la base en SQL sécurisé (lecture seule, garde-fous, streaming SSE)",
+      "Carte de chaleur du risque (rayon 5–50 km) et tableau de bord filtrable, rendu instantané côté client",
     ],
-    stack: ["React", "PostGIS", "Neo4j", "Qdrant", "Python"],
+    stack: ["React", "PostgreSQL", "PostGIS", "pgvector", "FastAPI", "Docker"],
     competences: ["c4", "c5", "c6"],
-    lien: { github: GITHUB },
+    etudeDeCas: "/realisations/aerowise",
+    lien: null,
   },
   {
     id: "ratp",
+    type: "pro",
     titre: "Modernisation d'un système d'archivage",
     sousTitre: "RATP Infrastructure",
     categorie: "Alternance / Stage",
@@ -48,6 +52,7 @@ export const projets = [
   },
   {
     id: "demographie",
+    type: "uni",
     titre: "Analyse démographique de la France (2019)",
     sousTitre: "Informatique décisionnelle",
     categorie: "Projet universitaire",
@@ -65,6 +70,7 @@ export const projets = [
   },
   {
     id: "meteovision",
+    type: "uni",
     titre: "MétéoVision",
     sousTitre: "Tableau de bord météorologique",
     categorie: "Projet universitaire",
@@ -81,6 +87,7 @@ export const projets = [
   },
   {
     id: "crypto",
+    type: "uni",
     titre: "Cryptographie & sécurité des données",
     sousTitre: "AES et codes correcteurs",
     categorie: "Projet universitaire",
@@ -97,6 +104,7 @@ export const projets = [
   },
   {
     id: "reseau",
+    type: "uni",
     titre: "Maquette réseau multi-routeurs",
     sousTitre: "Administration & réseaux",
     categorie: "Projet universitaire",

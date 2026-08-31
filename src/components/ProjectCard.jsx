@@ -1,4 +1,5 @@
-import { Lock, ArrowUpRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Lock, ArrowUpRight, ArrowRight } from 'lucide-react'
 import { Github } from './BrandIcons'
 import { competences } from '../data/competences'
 
@@ -51,7 +52,15 @@ export default function ProjectCard({ projet: p }) {
           })}
         </div>
 
-        {p.lien?.github ? (
+        {p.etudeDeCas ? (
+          <Link
+            to={p.etudeDeCas}
+            data-cursor="Étude de cas"
+            className="inline-flex items-center gap-1 pt-4 text-[14px] font-semibold text-brand transition-colors hover:text-ink"
+          >
+            Étude de cas <ArrowRight size={14} />
+          </Link>
+        ) : p.lien?.github ? (
           <a
             href={p.lien.github}
             target="_blank"
@@ -60,11 +69,11 @@ export default function ProjectCard({ projet: p }) {
           >
             <Github size={15} /> Code <ArrowUpRight size={14} />
           </a>
-        ) : (
+        ) : p.confidentiel ? (
           <span className="inline-flex items-center gap-1 pt-4 text-[13px] text-muted">
             <Lock size={13} /> Confidentiel
           </span>
-        )}
+        ) : null}
       </div>
     </article>
   )

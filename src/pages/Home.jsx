@@ -5,29 +5,15 @@ import { ChevronRight, ChevronDown, ArrowRight } from 'lucide-react'
 import { profil } from '../data/site'
 import Reveal from '../components/Reveal'
 import RevealText from '../components/RevealText'
-import ScrambleText from '../components/ScrambleText'
-import NetworkCanvas from '../components/NetworkCanvas'
 import SkyScene, { Cloud } from '../components/SkyScene'
 import { useWeather, useWeatherName } from '../components/WeatherContext'
-import Marquee from '../components/Marquee'
 import Magnetic from '../components/Magnetic'
 import TokenPill from '../components/TokenPill'
 import HorizontalCompetences from '../components/HorizontalCompetences'
 
-const KEYWORDS = [
-  'Données', 'Décisionnel', 'Big Data', 'SQL', 'Power BI', 'Neo4j',
-  'Qdrant', 'PostGIS', 'Data mining', 'Python', 'Cartographie', 'RATP',
-]
-
-// Étiquettes "tokens" flottantes (façon design system) — côté droit du hero
-const PILLS = [
-  { label: 'role = "apprenti.data"', color: '#2563eb', cls: 'right-[8%] top-[15%]', d: 6 },
-  { label: 'skill.data = "confirmé"', color: '#0ea5e9', cls: 'right-[16%] top-[33%]', d: 7.5 },
-  { weather: true, color: '#7c3aed', cls: 'right-[5%] top-[46%]', d: 6.2 },
-  { label: 'stack = [sql, python, neo4j]', color: '#2563eb', cls: 'right-[13%] top-[62%]', d: 6.8 },
-  { label: 'org = "ratp.infra"', color: '#059669', cls: 'right-[22%] top-[78%]', d: 8 },
-  { label: 'view = "portfolio.2026"', color: '#0ea5e9', cls: 'left-[42%] top-[14%]', d: 7 },
-  { label: 'lang = ["fr", "en"]', color: '#7c3aed', cls: 'right-[30%] top-[40%]', d: 6.5 },
+// Index de domaines — bandeau éditorial statique (remplace le marquee)
+const DOMAINES = [
+  'Données', 'Décisionnel', 'SQL', 'Power BI', 'Neo4j', 'PostGIS', 'Python', 'RATP',
 ]
 
 export default function Home() {
@@ -40,7 +26,7 @@ export default function Home() {
 
   return (
     <>
-      {/* ===================== HERO (ancré à gauche) ===================== */}
+      {/* ===================== HERO (thème ciel — inchangé) ===================== */}
       <section
         ref={heroRef}
         className="relative flex min-h-screen items-end overflow-hidden"
@@ -59,32 +45,21 @@ export default function Home() {
           />
         </AnimatePresence>
 
-        {/* décor : ciel, nuages, phrase gravée, grille */}
+        {/* décor : ciel, nuages, oiseaux, montgolfière, météo */}
         <SkyScene />
 
         {/* dégradé pour lisibilité du texte à gauche */}
         <div className="absolute inset-0 bg-gradient-to-r from-bg/65 via-bg/15 to-transparent" />
 
-        {/* tokens flottants (desktop) */}
-        <div className="pointer-events-none absolute inset-0 hidden lg:block">
-          {PILLS.map((p) => (
-            <motion.div
-              key={p.cls}
-              className={`absolute ${p.cls}`}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: [0, -12, 0] }}
-              transition={{
-                opacity: { duration: 0.6, delay: 0.8 },
-                y: { duration: p.d, repeat: Infinity, ease: 'easeInOut' },
-              }}
-            >
-              <TokenPill
-                label={p.weather ? `weather = "${weatherName}"` : p.label}
-                color={p.color}
-              />
-            </motion.div>
-          ))}
-        </div>
+        {/* indicateur météo (élément du thème ciel) */}
+        <motion.div
+          className="pointer-events-none absolute right-[7%] top-[20%] hidden lg:block"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: [0, -10, 0] }}
+          transition={{ opacity: { duration: 0.6, delay: 0.8 }, y: { duration: 6.5, repeat: Infinity, ease: 'easeInOut' } }}
+        >
+          <TokenPill label={`météo · ${weatherName}`} color="#2563eb" />
+        </motion.div>
 
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
@@ -95,29 +70,26 @@ export default function Home() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="font-mono text-xs uppercase tracking-[0.22em] text-muted"
+              className="text-xs uppercase tracking-[0.24em] text-muted"
             >
-              Portfolio de fin d'études · 2023—2026
+              Portfolio · Données &amp; systèmes d'information
             </motion.p>
 
-            <h1 className="mt-5 font-semibold leading-[0.92] tracking-[-0.035em] text-ink">
-              <ScrambleText
-                as="span"
-                text={profil.prenom}
-                className="block text-[clamp(2.4rem,7vw,5rem)]"
-              />
-              <ScrambleText
-                as="span"
-                text={profil.nom}
-                className="block text-[clamp(2.4rem,7vw,5rem)]"
-              />
-            </h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.15 }}
+              className="mt-6 font-medium leading-[0.94] tracking-[-0.02em] text-ink"
+            >
+              <span className="block text-[clamp(2.7rem,7.6vw,5.4rem)]">{profil.prenom}</span>
+              <span className="block text-[clamp(2.7rem,7.6vw,5.4rem)] italic">{profil.nom}</span>
+            </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.5 }}
-              className="mt-5 text-xl text-ink-soft sm:text-2xl"
+              className="mt-6 text-xl text-ink-soft sm:text-2xl"
             >
               {profil.titre}
             </motion.p>
@@ -142,8 +114,8 @@ export default function Home() {
                 </Link>
               </Magnetic>
               <Magnetic strength={0.2}>
-                <Link to="/demarche" className="link-arrow text-[17px]">
-                  Comment lire ce site <ChevronRight size={16} />
+                <Link to="/realisations" className="link-arrow text-[17px]">
+                  Voir mes réalisations <ChevronRight size={16} />
                 </Link>
               </Magnetic>
             </motion.div>
@@ -165,39 +137,39 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ===================== BANDEAU KINÉTIQUE ===================== */}
-      <div className="border-y border-line bg-surface-2 py-5 text-ink">
-        <Marquee
-          items={KEYWORDS}
-          duration={32}
-          className="text-2xl font-semibold uppercase tracking-tight sm:text-3xl"
-        />
+      {/* ===================== INDEX DE DOMAINES (statique, éditorial) ===================== */}
+      <div className="border-y border-line bg-surface-2/60">
+        <div className="container-wide flex flex-wrap items-center gap-x-3 gap-y-2 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-muted">
+          {DOMAINES.map((d, i) => (
+            <span key={d} className="flex items-center gap-3">
+              {i > 0 && <span aria-hidden className="text-line">/</span>}
+              {d}
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* ===================== COMPÉTENCES (scroll horizontal) ===================== */}
       <HorizontalCompetences />
 
-      {/* ===================== FIL ROUGE RATP (sombre, ancré à gauche) ===================== */}
+      {/* ===================== FIL ROUGE RATP (sombre, éditorial) ===================== */}
       <section className="relative flex min-h-screen items-center overflow-hidden bg-bg-dark text-white">
-        <div className="pointer-events-none absolute inset-0">
-          <NetworkCanvas nodeColor="#7cc3ff" lineColor="rgba(255,255,255,0.10)" density={0.00008} />
-        </div>
         <div
           className="absolute inset-0"
-          style={{ background: 'radial-gradient(120% 90% at 12% 25%, rgba(37,99,235,0.32) 0%, #0a1330 62%)' }}
+          style={{ background: 'radial-gradient(120% 90% at 12% 22%, rgba(37,99,235,0.28) 0%, #0a1330 62%)' }}
         />
         <div className="container-wide relative z-10">
           <div className="max-w-3xl">
             <RevealText>
-              <p className="font-mono text-xs uppercase tracking-[0.22em] text-white/55">Le fil rouge</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-white/55">Le fil rouge</p>
             </RevealText>
             <RevealText delay={0.08}>
-              <h2 className="mt-4 text-[clamp(2.2rem,6vw,4.2rem)] font-semibold leading-[1.05] tracking-tight">
+              <h2 className="mt-5 text-[clamp(2.4rem,6.4vw,4.6rem)] leading-[1.02]">
                 Deux ans chez RATP Infrastructure.
               </h2>
             </RevealText>
             <Reveal delay={0.2}>
-              <p className="mt-6 max-w-2xl text-lg text-white/70 sm:text-xl">
+              <p className="mt-7 max-w-2xl text-lg text-white/70 sm:text-xl">
                 De l'analyse de bases de données en production à la modernisation d'un système
                 d'archivage critique : un cas réel qui relie mes trois compétences.
               </p>
@@ -220,21 +192,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===================== CTA (ancré à gauche) ===================== */}
-      <section className="relative flex min-h-[70vh] items-center overflow-hidden bg-bg py-28">
-        <div className="pointer-events-none absolute inset-0 opacity-70">
-          <NetworkCanvas nodeColor="#059669" lineColor="rgba(20,24,40,0.09)" density={0.00007} />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-bg/70 via-bg/25 to-transparent" />
+      {/* ===================== CTA (éditorial, épuré) ===================== */}
+      <section className="relative flex min-h-[64vh] items-center overflow-hidden bg-bg py-28">
         <div className="container-wide relative z-10">
           <div className="max-w-2xl">
             <RevealText>
-              <h2 className="text-[clamp(2.6rem,7vw,4.5rem)] font-semibold tracking-tight text-ink">
-                <ScrambleText text="Échangeons." />
+              <h2 className="text-[clamp(2.8rem,7vw,4.8rem)] leading-[1.0] text-ink">
+                Échangeons.
               </h2>
             </RevealText>
             <Reveal delay={0.15}>
-              <p className="mt-5 text-xl text-ink-soft">
+              <p className="mt-6 text-xl text-ink-soft">
                 Une question sur mon parcours, mon apprentissage ou une opportunité ?
               </p>
             </Reveal>

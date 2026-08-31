@@ -1,23 +1,22 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Home, User, Compass, Layers, Briefcase, GraduationCap, Mail, X, LayoutGrid } from 'lucide-react'
+import { Home, User, Layers, Briefcase, GraduationCap, Mail, X, LayoutGrid } from 'lucide-react'
 import { profil } from '../data/site'
 import LogoMark from './LogoMark'
 
 const NAV = [
   { to: '/', label: 'Accueil', icon: Home },
   { to: '/profil', label: 'Profil', icon: User },
-  { to: '/demarche', label: 'Démarche', icon: Compass },
   { to: '/competences', label: 'Compétences', icon: Layers },
   { to: '/realisations', label: 'Réalisations', icon: Briefcase },
   { to: '/parcours', label: 'Parcours', icon: GraduationCap },
   { to: '/contact', label: 'Contact', icon: Mail },
 ]
 // Liens du centre (desktop) : tout sauf Accueil (le logo y renvoie) et Contact (bouton)
-const CENTER = NAV.slice(1, 6)
+const CENTER = NAV.slice(1, 5)
 // Dock mobile : 4 raccourcis + bouton Menu
-const DOCK = [NAV[0], NAV[3], NAV[4], NAV[6]]
+const DOCK = [NAV[0], NAV[2], NAV[3], NAV[5]]
 
 const Logo = () => (
   <Link to="/" className="flex items-center gap-2.5">

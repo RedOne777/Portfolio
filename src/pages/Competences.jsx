@@ -5,7 +5,7 @@ import CompetenceCard from '../components/CompetenceCard'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 
-// Petit indicateur de niveau (3 paliers : Novice / Intermédiaire / Confirmé)
+// Petit indicateur de niveau (3 paliers : Notions / Intermédiaire / Avancé)
 function NiveauMeter({ niveauNum, color }) {
   return (
     <div className="flex items-center gap-1.5" title={`Niveau ${niveauNum} sur 3`}>
@@ -59,24 +59,24 @@ export default function Competences() {
   return (
     <div className="container-px pt-32 pb-10">
       <section className="max-w-3xl">
-        <span className="chip">Mes compétences expliquées simplement</span>
+        <p className="eyebrow">Compétences · Parcours C — Données</p>
         <h1 className="mt-5 font-display text-4xl font-bold text-ink sm:text-5xl">
           Ce que je sais faire
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-muted">
-          Ma formation est organisée autour de <strong className="text-ink">compétences</strong> : des
-          savoir-faire concrets que l'on développe sur 3 ans, en montant en niveau année après année.
-          J'en ai acquis <strong className="text-ink">six</strong>. Cette dernière année, <strong className="text-ink">trois</strong> sont
-          montées au niveau le plus avancé (« Confirmé ») : ce sont celles que je démontre en détail,
-          preuves à l'appui.
+          Mon cursus — BUT Informatique, parcours C «&nbsp;Administration, gestion et exploitation des
+          données&nbsp;» — s'organise autour de <strong className="text-ink">six compétences</strong>. En 3ᵉ année,
+          <strong className="text-ink"> trois atteignent le niveau&nbsp;3</strong> : gérer les données,
+          conduire un projet et collaborer en équipe. C'est mon <strong className="text-ink">cœur
+          d'expertise</strong>, que je démontre ici preuves à l'appui.
         </p>
       </section>
 
       {/* Vue d'ensemble des 6 compétences */}
       <section className="mt-14">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
-          <h2 className="text-2xl font-semibold tracking-tight text-ink">Vue d'ensemble — mes 6 compétences</h2>
-          <p className="text-sm text-muted">3 paliers : Novice · Intermédiaire · Confirmé</p>
+          <h2 className="text-2xl font-semibold tracking-tight text-ink">Les 6 compétences du référentiel</h2>
+          <p className="text-sm text-muted">● Niveau atteint en parcours C (sur 3)</p>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {toutesLesCompetences.map((c, i) => (
@@ -90,9 +90,9 @@ export default function Competences() {
       {/* Les 3 compétences détaillées */}
       <section className="mt-20">
         <SectionHeading
-          eyebrow="Niveau Confirmé · démonstration détaillée"
-          title="Les 3 compétences de cette année"
-          description="Pour chacune : ce qu'elle recouvre, comment je l'ai mise en œuvre, et les preuves concrètes."
+          eyebrow="Cœur d'expertise · niveau 3"
+          title="Les 3 compétences de niveau 3"
+          description="Pour chacune : l'objectif du référentiel, les apprentissages critiques visés, et mes preuves concrètes."
         />
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {competences.map((c, i) => (

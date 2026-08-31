@@ -68,7 +68,6 @@ export const langues = [
 // Navigation principale
 export const navLinks = [
   { to: "/profil", label: "Profil" },
-  { to: "/demarche", label: "Démarche" },
   { to: "/competences", label: "Compétences" },
   { to: "/realisations", label: "Réalisations" },
   { to: "/parcours", label: "Parcours" },
@@ -76,8 +75,8 @@ export const navLinks = [
 
 // Quelques chiffres clés pour le hero
 export const chiffresCles = [
-  { valeur: "3", label: "compétences validées au plus haut niveau" },
+  { valeur: "3", label: "compétences clés maîtrisées" },
   { valeur: "Data", label: "spécialité données" },
   { valeur: "2 ans", label: "d'apprentissage & stage chez RATP" },
-  { valeur: "Bac+3", label: "fin d'études 2023 – 2026" },
+  { valeur: "Bac+3", label: "BUT Informatique · 2023–2026" },
 ];

@@ -8,6 +8,7 @@ export default function CompetenceCard({ competence: c }) {
   return (
     <Link
       to={`/competences/${c.slug}`}
+      data-cursor="Explorer"
       className="group flex h-full flex-col rounded-[18px] border border-line bg-surface p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_-20px_rgba(20,24,40,0.25)]"
     >
       <div className="flex items-center justify-between">
@@ -23,9 +24,6 @@ export default function CompetenceCard({ competence: c }) {
       </div>
 
       <h3 className="mt-6 text-[22px] font-semibold tracking-tight text-ink">{c.titre}</h3>
-      <p className="mt-1 text-[14px] font-medium" style={{ color: c.color }}>
-        Niveau Confirmé
-      </p>
       <p className="mt-3 flex-1 text-[15px] leading-relaxed text-muted">{c.tagline}</p>
 
       <span className="link-arrow mt-6 text-[15px]">

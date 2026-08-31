@@ -22,7 +22,7 @@ function Panel({ c }) {
           </span>
           <Icon size={64} className="text-white" strokeWidth={1.4} />
           <span className="absolute left-8 top-8 text-sm font-semibold uppercase tracking-widest text-white/80">
-            Niveau Confirmé
+            {c.verbe}
           </span>
         </div>
 
@@ -35,19 +35,22 @@ function Panel({ c }) {
             {c.titre}
           </h3>
           <p className="mt-4 max-w-xl text-lg text-muted">{c.tagline}</p>
+          <p className="mt-3 max-w-xl text-sm font-medium" style={{ color: c.color }}>
+            Niveau {c.niveauNum} · {c.niveauTitre}
+          </p>
 
           <ul className="mt-6 grid max-w-xl gap-2.5">
-            {c.apprentissagesCritiques.map((ac, i) => (
-              <li key={ac.code} className="flex gap-3 text-[15px] text-ink-soft">
+            {c.apprentissages.slice(0, 4).map((s, i) => (
+              <li key={s} className="flex gap-3 text-[15px] text-ink-soft">
                 <span className="font-mono text-sm font-semibold" style={{ color: c.color }}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <span>{ac.texte}</span>
+                <span>{s}</span>
               </li>
             ))}
           </ul>
 
-          <Link to={`/competences/${c.slug}`} className="btn mt-8 text-white" style={{ background: c.color }}>
+          <Link to={`/competences/${c.slug}`} data-cursor="Explorer" className="btn mt-8 text-white" style={{ background: c.color }}>
             Explorer la compétence <ArrowRight size={17} />
           </Link>
         </div>
@@ -75,7 +78,7 @@ export default function HorizontalCompetences() {
           {/* En-tête fixe */}
           <div className="container-wide absolute left-1/2 top-16 z-10 -translate-x-1/2">
             <div className="flex items-end justify-between">
-              <p className="eyebrow">Les 3 compétences · défilez →</p>
+              <p className="eyebrow">Compétences de niveau 3 · défilez →</p>
               <p className="font-mono text-sm text-muted">
                 0{active + 1} / 0{n}
               </p>

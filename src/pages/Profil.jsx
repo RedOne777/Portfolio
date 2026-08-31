@@ -104,7 +104,7 @@ export default function Profil() {
                     <span className="text-muted">{l.niveau}</span>
                   </div>
                   <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
-                    <div className="h-full rounded-full bg-gradient-to-r from-brand to-brand-2" style={{ width: `${l.valeur}%` }} />
+                    <div className="h-full rounded-full bg-ink" style={{ width: `${l.valeur}%` }} />
                   </div>
                 </li>
               ))}
@@ -116,7 +116,7 @@ export default function Profil() {
       {/* CTA */}
       <Reveal className="mt-16">
         <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-line bg-surface-2/40 p-6">
-          <p className="text-muted">Découvrez la démonstration de mes trois compétences.</p>
+          <p className="text-muted">Découvrez mes trois compétences clés, preuves à l'appui.</p>
           <Link to="/competences" className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white">
             Voir les compétences <ArrowRight size={16} />
           </Link>

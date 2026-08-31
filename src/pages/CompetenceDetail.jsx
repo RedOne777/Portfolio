@@ -2,20 +2,16 @@ import { useParams, Link, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   ArrowLeft, ArrowRight, ArrowUpRight, Lock, CheckCircle2, Target,
-  BookOpen, GraduationCap, Database, Workflow, Users, Gauge,
+  Database, Workflow, Users,
 } from 'lucide-react'
 import { competences, competenceBySlug } from '../data/competences'
-import { echelleEvaluation } from '../data/demarche'
 import Reveal from '../components/Reveal'
 import SectionNav from '../components/SectionNav'
 
 const SECTIONS = [
   { id: 'apercu', label: 'Aperçu' },
-  { id: 'niveau', label: 'Mon niveau' },
-  { id: 'composantes', label: 'Composantes' },
   { id: 'apprentissages', label: 'Apprentissages' },
-  { id: 'traces', label: 'Preuves' },
-  { id: 'ressources', label: 'Ressources' },
+  { id: 'projets', label: 'Projets' },
   { id: 'bilan', label: 'Bilan' },
 ]
 
@@ -30,16 +26,6 @@ export default function CompetenceDetail() {
   const idx = competences.findIndex((x) => x.id === c.id)
   const next = competences[(idx + 1) % competences.length]
   const prev = competences[(idx - 1 + competences.length) % competences.length]
-
-  // Chips colorées (AC / CE)
-  const RefChip = ({ code }) => (
-    <span
-      className="rounded-md px-1.5 py-0.5 text-xs font-bold"
-      style={{ color: c.color, background: `${c.color}1a` }}
-    >
-      {code}
-    </span>
-  )
 
   return (
     <div className="container-px pt-28 pb-10">
@@ -69,10 +55,8 @@ export default function CompetenceDetail() {
             <Icon size={26} />
           </span>
           <div>
-            <span className="font-display text-sm font-bold" style={{ color: c.color }}>
-              Compétence {c.code.replace('C', '')} · Niveau Confirmé
-            </span>
-            <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">{c.titre}</h1>
+            <p className="eyebrow" style={{ color: c.color }}>Compétence {c.code.replace('C', '')} · Niveau {c.niveauNum}</p>
+            <h1 className="mt-1 text-3xl font-semibold text-ink sm:text-[2.6rem]">{c.titre}</h1>
           </div>
         </div>
         <p className="mt-4 max-w-3xl text-lg text-muted">{c.tagline}</p>
@@ -80,22 +64,23 @@ export default function CompetenceDetail() {
 
       <SectionNav sections={SECTIONS} accent={c.color} />
 
-      {/* Définition + situations pro */}
+      {/* Définition + cas d'usage */}
       <section className="mt-10 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
         <Reveal>
           <div className="card h-full p-6">
-            <h2 className="flex items-center gap-2 font-display text-base font-semibold text-ink">
-              <BookOpen size={18} style={{ color: c.color }} /> Niveau Confirmé
-            </h2>
-            <p className="mt-1 text-sm font-medium" style={{ color: c.color }}>{c.niveau3}</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
+              Référentiel BUT · parcours C — {c.titreOfficiel}
+            </p>
+            <h2 className="mt-2 font-display text-base font-semibold text-ink">Objectif de niveau {c.niveauNum}</h2>
+            <p className="mt-1 text-[15px] font-medium" style={{ color: c.color }}>« {c.niveauTitre} »</p>
             <p className="mt-4 text-muted">{c.definition}</p>
           </div>
         </Reveal>
         <Reveal delay={0.08}>
           <div className="card h-full p-6">
-            <h2 className="font-display text-base font-semibold text-ink">Situations professionnelles</h2>
+            <h2 className="font-display text-base font-semibold text-ink">Cas d'usage</h2>
             <ul className="mt-4 space-y-2">
-              {c.situationsPro.map((s) => (
+              {c.casUsage.map((s) => (
                 <li key={s} className="flex gap-2 text-sm text-muted">
                   <span className="mt-2 h-1 w-1 shrink-0 rounded-full" style={{ background: c.color }} />
                   {s}
@@ -106,86 +91,49 @@ export default function CompetenceDetail() {
         </Reveal>
       </section>
 
-      {/* Auto-positionnement */}
-      <Reveal className="mt-6">
-        <div id="niveau" className="card p-6 sm:p-8">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-xl border border-line bg-surface-2" style={{ color: c.color }}>
-              <Gauge size={20} />
-            </span>
-            <h2 className="font-display text-lg font-semibold text-ink">Mon auto-positionnement</h2>
-            <span className="chip" style={{ color: c.color, borderColor: `${c.color}55` }}>
-              <CheckCircle2 size={14} /> {c.autoPositionnement.intitule}
-            </span>
-          </div>
-
-          {/* barre échelle */}
-          <div className="mt-6 grid grid-cols-4 gap-1.5">
-            {echelleEvaluation.map((e) => {
-              const isCurrent = e.plage.replace(/\s/g, '') === c.autoPositionnement.plage.replace(/\s/g, '')
-              const isVers = c.autoPositionnement.vers && e.plage.replace(/\s/g, '') === c.autoPositionnement.vers.replace(/\s/g, '')
-              return (
-                <div key={e.plage} className="text-center">
-                  <div
-                    className="h-2 rounded-full transition-all"
-                    style={{
-                      background: isCurrent ? c.color : isVers ? `${c.color}66` : 'rgba(148,163,184,0.18)',
-                    }}
-                  />
-                  <span className={`mt-1.5 block text-[11px] ${isCurrent ? 'font-bold text-ink' : 'text-muted'}`}>
-                    {e.plage}
-                  </span>
-                </div>
-              )
-            })}
-          </div>
-
-          <p className="mt-5 text-muted">{c.autoPositionnement.argument}</p>
-        </div>
-      </Reveal>
-
-      {/* Composantes essentielles */}
-      <section id="composantes" className="mt-16">
-        <h2 className="font-display text-2xl font-bold text-ink">Composantes essentielles</h2>
-        <p className="mt-2 text-muted">Les critères qualité indissociables de la compétence — chacun doit être validé.</p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {c.composantesEssentielles.map((ce, i) => (
-            <Reveal key={ce.code} delay={i * 0.05}>
-              <div className="card flex items-start gap-3 p-5">
-                <span className="rounded-md px-2 py-1 text-xs font-bold" style={{ color: c.color, background: `${c.color}1a` }}>
-                  {ce.code}
-                </span>
-                <p className="text-sm text-muted">{ce.texte}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Apprentissages critiques */}
+      {/* Apprentissages critiques + composantes essentielles */}
       <section id="apprentissages" className="mt-16">
         <h2 className="font-display text-2xl font-bold text-ink">Apprentissages critiques</h2>
-        <p className="mt-2 text-muted">Les seuils d'apprentissage qui définissent le niveau Confirmé.</p>
-        <div className="mt-6 space-y-3">
-          {c.apprentissagesCritiques.map((ac, i) => (
-            <Reveal key={ac.code} delay={i * 0.05}>
-              <div className="card flex items-start gap-4 p-5">
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg font-display text-xs font-bold" style={{ color: c.color, background: `${c.color}1a` }}>
-                  {ac.code}
+        <p className="mt-2 max-w-3xl text-muted">
+          Les savoir-faire visés au niveau {c.niveauNum} par le référentiel (parcours C) —
+          ce que je dois démontrer, preuves à l'appui.
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          {c.apprentissages.map((s, i) => (
+            <Reveal key={s} delay={i * 0.05}>
+              <div className="card flex items-start gap-3 p-5">
+                <span className="mt-0.5 font-mono text-sm font-semibold" style={{ color: c.color }}>
+                  AC{i + 1}
                 </span>
-                <p className="text-ink/90">{ac.texte}</p>
+                <p className="text-sm text-ink-soft">{s}</p>
               </div>
             </Reveal>
           ))}
         </div>
+
+        {/* Composantes essentielles */}
+        <Reveal>
+          <div className="card-soft mt-4 p-6">
+            <h3 className="text-sm font-semibold text-ink">Composantes essentielles</h3>
+            <p className="mt-1 text-sm text-muted">Le cadre dans lequel la compétence s'exerce.</p>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              {c.composantes.map((ce) => (
+                <li key={ce} className="flex gap-2 text-sm text-ink-soft">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full" style={{ background: c.color }} />
+                  {ce}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </section>
 
-      {/* Traces / preuves */}
-      <section id="traces" className="mt-16">
-        <h2 className="font-display text-2xl font-bold text-ink">Traces & analyse réflexive</h2>
+      {/* Projets & réalisations */}
+      <section id="projets" className="mt-16">
+        <h2 className="font-display text-2xl font-bold text-ink">Projets & réalisations</h2>
         <p className="mt-2 max-w-3xl text-muted">
-          Les preuves concrètes de ma montée en compétence, analysées au regard des apprentissages
-          critiques (AC) et des composantes essentielles (CE).
+          Les preuves concrètes, avec une courte analyse : ce que j'ai fait, ce que j'en ai tiré,
+          et ce que j'améliorerais.
         </p>
         <div className="mt-8 space-y-6">
           {c.traces.map((t, i) => (
@@ -201,16 +149,6 @@ export default function CompetenceDetail() {
                   </span>
                 </div>
 
-                {/* références AC / CE */}
-                <div className="mt-4 flex flex-wrap items-center gap-1.5">
-                  {t.ac.map((code) => <RefChip key={code} code={code} />)}
-                  {t.ce.map((code) => (
-                    <span key={code} className="rounded-md border px-1.5 py-0.5 text-xs font-bold" style={{ color: c.color, borderColor: `${c.color}40` }}>
-                      {code}
-                    </span>
-                  ))}
-                </div>
-
                 <p className="mt-4 leading-relaxed text-muted">{t.analyse}</p>
 
                 {/* stack */}
@@ -223,17 +161,23 @@ export default function CompetenceDetail() {
                 {/* preuves */}
                 {t.preuves?.length > 0 && (
                   <div className="mt-5 flex flex-wrap gap-3 border-t border-line pt-4">
-                    {t.preuves.map((pr) =>
-                      pr.url ? (
+                    {t.preuves.map((pr) => {
+                      if (!pr.url)
+                        return (
+                          <span key={pr.label} className="inline-flex items-center gap-1.5 text-sm text-muted">
+                            <Lock size={14} /> {pr.label}
+                          </span>
+                        )
+                      return pr.url.startsWith('/') ? (
+                        <Link key={pr.label} to={pr.url} className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-ink" style={{ color: c.color }}>
+                          {pr.label} <ArrowRight size={14} />
+                        </Link>
+                      ) : (
                         <a key={pr.label} href={pr.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-ink" style={{ color: c.color }}>
                           {pr.label} <ArrowUpRight size={14} />
                         </a>
-                      ) : (
-                        <span key={pr.label} className="inline-flex items-center gap-1.5 text-sm text-muted">
-                          <Lock size={14} /> {pr.label}
-                        </span>
                       )
-                    )}
+                    })}
                   </div>
                 )}
               </article>
@@ -242,43 +186,12 @@ export default function CompetenceDetail() {
         </div>
       </section>
 
-      {/* Ressources & SAÉ */}
-      <section id="ressources" className="mt-16 grid gap-6 md:grid-cols-2">
-        <Reveal>
-          <div className="card h-full p-6">
-            <h2 className="flex items-center gap-2 font-display text-base font-semibold text-ink">
-              <BookOpen size={18} style={{ color: c.color }} /> Ressources mobilisées
-            </h2>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {c.ressources.map((r) => (
-                <span key={r} className="chip">{r}</span>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-        <Reveal delay={0.08}>
-          <div className="card h-full p-6">
-            <h2 className="flex items-center gap-2 font-display text-base font-semibold text-ink">
-              <GraduationCap size={18} style={{ color: c.color }} /> Projets & mises en situation
-            </h2>
-            <ul className="mt-4 space-y-2">
-              {c.saes.map((s) => (
-                <li key={s} className="flex gap-2 text-sm text-muted">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full" style={{ background: c.color }} />
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* Bilan & pistes */}
+      {/* Bilan & prochaines étapes */}
       <section id="bilan" className="mt-16 grid gap-6 lg:grid-cols-2">
         <Reveal>
           <div className="card h-full p-6">
             <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-ink">
-              <CheckCircle2 size={18} style={{ color: c.color }} /> Bilan réflexif
+              <CheckCircle2 size={18} style={{ color: c.color }} /> Ce que j'en retire
             </h2>
             <p className="mt-3 text-muted">{c.bilan}</p>
           </div>
@@ -286,7 +199,7 @@ export default function CompetenceDetail() {
         <Reveal delay={0.08}>
           <div className="card h-full p-6">
             <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-ink">
-              <Target size={18} style={{ color: c.color }} /> Pistes d'amélioration
+              <Target size={18} style={{ color: c.color }} /> Prochaines étapes
             </h2>
             <ul className="mt-3 space-y-2.5">
               {c.pistes.map((p) => (

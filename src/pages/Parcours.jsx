@@ -46,7 +46,7 @@ export default function Parcours() {
   return (
     <div className="container-px pt-32 pb-10">
       <section className="max-w-3xl">
-        <span className="chip">Mon itinéraire</span>
+        <p className="eyebrow">Parcours</p>
         <h1 className="mt-5 font-display text-4xl font-bold text-ink sm:text-5xl">Parcours</h1>
         <p className="mt-5 text-lg leading-relaxed text-muted">
           Une formation tournée vers la donnée, renforcée par une alternance et un stage dans un

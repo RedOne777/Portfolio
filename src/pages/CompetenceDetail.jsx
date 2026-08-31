@@ -55,10 +55,8 @@ export default function CompetenceDetail() {
             <Icon size={26} />
           </span>
           <div>
-            <span className="font-display text-sm font-bold uppercase tracking-wide" style={{ color: c.color }}>
-              Compétence clé
-            </span>
-            <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">{c.titre}</h1>
+            <p className="eyebrow" style={{ color: c.color }}>Compétence clé</p>
+            <h1 className="mt-1 text-3xl font-semibold text-ink sm:text-[2.6rem]">{c.titre}</h1>
           </div>
         </div>
         <p className="mt-4 max-w-3xl text-lg text-muted">{c.tagline}</p>

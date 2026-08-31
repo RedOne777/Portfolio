@@ -104,7 +104,7 @@ export default function Profil() {
                     <span className="text-muted">{l.niveau}</span>
                   </div>
                   <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
-                    <div className="h-full rounded-full bg-gradient-to-r from-brand to-brand-2" style={{ width: `${l.valeur}%` }} />
+                    <div className="h-full rounded-full bg-ink" style={{ width: `${l.valeur}%` }} />
                   </div>
                 </li>
               ))}

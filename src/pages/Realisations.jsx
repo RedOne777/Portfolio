@@ -26,9 +26,9 @@ export default function Realisations() {
   }, [hash])
 
   const filtres = [
-    { id: 'all', label: 'Tous', color: '#38bdf8' },
-    { id: 'uni', label: 'Projets universitaires', color: '#2563eb' },
-    { id: 'pro', label: 'Expériences professionnelles', color: '#059669' },
+    { id: 'all', label: 'Tous', color: '#161922' },
+    { id: 'uni', label: 'Projets universitaires', color: '#161922' },
+    { id: 'pro', label: 'Expériences professionnelles', color: '#161922' },
   ]
 
   const liste =
@@ -37,7 +37,7 @@ export default function Realisations() {
   return (
     <div className="container-px pt-32 pb-10">
       <section className="max-w-3xl">
-        <span className="chip">Traces & preuves</span>
+        <p className="eyebrow">Projets &amp; preuves</p>
         <h1 className="mt-5 font-display text-4xl font-bold text-ink sm:text-5xl">Réalisations</h1>
         <p className="mt-5 text-lg leading-relaxed text-muted">
           Les projets et expériences professionnelles qui illustrent mes compétences au quotidien.

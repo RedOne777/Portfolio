@@ -28,7 +28,7 @@ export default function Contact() {
   return (
     <div className="container-px pt-32 pb-10">
       <section className="max-w-3xl">
-        <span className="chip">Restons en contact</span>
+        <p className="eyebrow">Prendre contact</p>
         <h1 className="mt-5 font-display text-4xl font-bold text-ink sm:text-5xl">Contact</h1>
         <p className="mt-5 text-lg leading-relaxed text-muted">
           Une question sur mon parcours, mon alternance ou une opportunité ? Je serai ravi d'échanger.

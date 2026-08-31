@@ -59,7 +59,7 @@ export default function Competences() {
   return (
     <div className="container-px pt-32 pb-10">
       <section className="max-w-3xl">
-        <span className="chip">Mes compétences</span>
+        <p className="eyebrow">Compétences</p>
         <h1 className="mt-5 font-display text-4xl font-bold text-ink sm:text-5xl">
           Ce que je sais faire
         </h1>

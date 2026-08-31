@@ -19,15 +19,15 @@
   --color-brand: #2563eb;        /* bleu franc */
   --color-brand-2: #7c3aed;
 
-  /* Couleurs des 3 compétences (lisibles sur fond clair) */
-  --color-c4: #0ea5e9;
-  --color-c5: #7c3aed;
-  --color-c6: #059669;
+  /* Couleurs des 3 compétences — teintes éditoriales sourdes (fond clair) */
+  --color-c4: #2f6f9f;   /* bleu acier */
+  --color-c5: #6b5aa0;   /* violet ardoise */
+  --color-c6: #2e8b6b;   /* vert sourd */
 
-  /* Typographies — pile système */
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-display: var(--font-sans);
+  /* Typographies — éditorial : Inter (texte/UI) + Fraunces (titres, serif) */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
 
   --radius-card: 18px;
 }
@@ -45,8 +45,7 @@
   body {
     background-color: var(--color-bg);
     background-image:
-      radial-gradient(900px 540px at 82% -5%, rgba(37, 99, 235, 0.10), transparent 60%),
-      radial-gradient(1000px 620px at 12% 0%, rgba(124, 58, 237, 0.07), transparent 55%);
+      radial-gradient(1100px 640px at 88% -10%, rgba(37, 99, 235, 0.05), transparent 60%);
     background-attachment: fixed;
     color: var(--color-ink);
     font-family: var(--font-sans);
@@ -78,11 +77,16 @@
     mix-blend-mode: multiply;
   }
 
-  h1, h2, h3, h4 {
+  /* Tout ce qui est « titre » passe en serif éditorial (Fraunces).
+     Le corps de texte et les libellés restent en Inter. */
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
     font-weight: 600;
-    letter-spacing: -0.022em;
-    line-height: 1.06;
   }
+  h1, h2 { letter-spacing: -0.014em; line-height: 1.03; }
+  h3 { letter-spacing: -0.008em; line-height: 1.12; }
+  h4 { font-weight: 600; letter-spacing: -0.015em; line-height: 1.1; }
 
   ::selection { background: rgba(41, 151, 255, 0.35); color: #fff; }
 
@@ -197,10 +201,24 @@
   }
   .link-arrow:hover { text-decoration: underline; }
 
+  /* Libellé de section éditorial : petit, capitales espacées, filet en amorce */
   .eyebrow {
-    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
     font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
     color: var(--color-muted);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.6rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.5;
   }
 }
 

@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Lenis from 'lenis'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import Cursor from './components/Cursor'
 import ScrollProgress from './components/ScrollProgress'
 import GlobalBackground from './components/GlobalBackground'
 import Home from './pages/Home'
@@ -48,7 +47,6 @@ export default function App() {
       <GlobalBackground />
       <div className="grain-layer pointer-events-none fixed inset-0 -z-10" aria-hidden="true" />
       <ScrollProgress />
-      <Cursor />
       <Navbar />
       <main className="flex-1">
         <AnimatePresence mode="wait">

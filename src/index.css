@@ -55,21 +55,6 @@
     overflow-x: hidden;
   }
 
-  /* Curseur sur-mesure : masque le curseur natif (pointeur fin, md+).
-     Les champs de formulaire gardent volontairement leur curseur texte. */
-  @media (min-width: 768px) and (pointer: fine) {
-    html.has-cursor,
-    html.has-cursor a,
-    html.has-cursor button,
-    html.has-cursor label,
-    html.has-cursor [role="button"],
-    html.has-cursor [data-cursor],
-    html.has-cursor .btn-primary,
-    html.has-cursor .btn-ghost {
-      cursor: none;
-    }
-  }
-
   /* Couche de grain (texture) — utilisée via <div class="grain-layer"> au fond de l'app */
   .grain-layer {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
